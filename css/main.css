@@ -1,0 +1,2355 @@
+/* ============================================================
+   Sts. Cyril and Methody Cathedral - Main Stylesheet
+   Bulgarian Orthodox Traditional Color Scheme
+   ============================================================ */
+
+/* ============================================================
+   ORTHODOX HEADING FONTS — self-hosted
+   Latin  → Uncial Antiqua (Google Fonts)
+   Cyrillic / Bulgarian → Monomakh (SIL Open Font License 1.1)
+   Both declared under one family so unicode-range handles
+   script selection automatically in the browser.
+   ============================================================ */
+
+/* Uncial Antiqua — Latin characters (English) */
+@font-face {
+  font-family: 'Orthodox';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/uncialantiqua/v22/N0bM2S5WOex4OUbESzoESK-i-PfR.ttf') format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Monomakh — Cyrillic characters (Bulgarian) */
+@font-face {
+  font-family: 'Orthodox';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/monomakh-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/* Open Sans + PT Serif remain on Google Fonts CDN */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES
+   ============================================================ */
+:root {
+  --primary-gold:   #D4AF37;
+  --orthodox-blue:  #003893;
+  --bulgarian-red:  #D62612;
+  --white:          #FFFFFF;
+  --cream:          #FAF7F2;
+  --dark-text:      #1a1a2e;
+  --light-gold:     #F4E4C1;
+  --shadow:         rgba(0, 56, 147, 0.1);
+  --gold-light:     rgba(212, 175, 55, 0.15);
+  --blue-light:     rgba(0, 56, 147, 0.08);
+  --transition:     0.3s ease;
+  --radius:         8px;
+  --radius-lg:      12px;
+  --max-width:      1200px;
+  --nav-height:     56px;
+}
+
+/* ============================================================
+   ORTHODOX ORNAMENTAL BORDER
+   ============================================================ */
+.orth-border-top {
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(to bottom,
+    #D4AF37 0px,   #D4AF37 2px,
+    #19080A 2px,   #19080A 8px,
+    #D4AF37 8px,   #D4AF37 10px
+  );
+  flex-shrink: 0;
+  position: relative;
+  z-index: 9999;
+}
+
+.orth-border-section {
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(to bottom,
+    #D4AF37 0px,   #D4AF37 2px,
+    #19080A 2px,   #19080A 8px,
+    #D4AF37 8px,   #D4AF37 10px
+  );
+  margin: 32px 0;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden; /* prevent horizontal scroll on every page */
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--dark-text);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  max-width: 100vw; /* belt-and-suspenders: nothing wider than viewport */
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+button { font-family: inherit; }
+ul { list-style: none; }
+
+/* ============================================================
+   SKIP LINK
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 20px;
+  background: var(--primary-gold);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 0 0 4px 4px;
+  font-family: 'Orthodox', serif;
+  font-size: 0.875rem;
+  z-index: 10000;
+  transition: top var(--transition);
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4, h5 { font-family: 'Orthodox', serif; line-height: 1.2; }
+p { line-height: 1.7; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  background: var(--cream);
+  border-bottom: 3px solid var(--primary-gold);
+  padding: 20px 16px;
+  position: relative;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--bulgarian-red), var(--orthodox-blue), var(--bulgarian-red));
+  opacity: 0.4;
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header-icon {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-gold);
+  box-shadow:
+    0 0 0 8px rgba(212, 175, 55, 0.2),
+    0 0 0 10px rgba(212, 175, 55, 0.08),
+    0 6px 24px rgba(0, 56, 147, 0.2);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.header-icon:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 0 10px rgba(212, 175, 55, 0.25), 0 8px 32px rgba(0, 56, 147, 0.25);
+}
+
+.icon-placeholder {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid var(--primary-gold);
+  box-shadow: 0 0 0 8px rgba(212, 175, 55, 0.2), 0 6px 24px rgba(0, 56, 147, 0.2);
+  background: linear-gradient(135deg, var(--cream), var(--light-gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.icon-label {
+  font-family: 'Orthodox', serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.cathedral-name {
+  font-family: 'Orthodox', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.15;
+  text-shadow: 1px 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.cathedral-subtitle {
+  font-family: 'PT Serif', serif;
+  font-size: 1.05rem;
+  color: var(--orthodox-blue);
+  margin-top: 8px;
+  letter-spacing: 0.05em;
+}
+
+.header-est {
+  font-family: 'Orthodox', serif;
+  font-size: 0.875rem;
+  color: var(--dark-text);
+  letter-spacing: 0.2em;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.cross-divider {
+  color: var(--primary-gold);
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+.cross-divider .orthodox-cross-icon {
+  width: 0.75em;
+  height: 1em;
+  fill: var(--primary-gold);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 20px var(--shadow);
+  border-bottom: 2px solid var(--primary-gold);
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--nav-height);
+}
+
+.nav-menu {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  justify-content: center;
+}
+
+.nav-menu li a {
+  display: block;
+  padding: 18px 10px;
+  font-family: 'Orthodox', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color var(--transition), border-bottom-color var(--transition);
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.active {
+  color: var(--primary-gold);
+  border-bottom-color: var(--primary-gold);
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.lang-btn {
+  padding: 5px 10px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  font-family: 'Orthodox', serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 3px;
+  transition: all var(--transition);
+  background: transparent;
+  color: var(--dark-text);
+}
+.lang-btn.active {
+  background: var(--primary-gold);
+  color: white;
+  border-color: var(--primary-gold);
+}
+.lang-btn:not(.active):hover {
+  border-color: var(--primary-gold);
+  color: var(--primary-gold);
+}
+
+.lang-separator {
+  color: var(--primary-gold);
+  font-size: 0.875rem;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+  z-index: 1001;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--dark-text);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+
+/* ============================================================
+   HERO (Home Page)
+   ============================================================ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 69.3vh;
+  min-height: 401px;
+  overflow: hidden;
+}
+
+/* Legacy — kept for fallback */
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* HERO SLIDESHOW */
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  transition: opacity 1.4s ease-in-out;
+  will-change: opacity, transform;
+}
+.hero-slide.active {
+  opacity: 1;
+  animation: hero-zoom-out 7.5s ease-out forwards;
+}
+@keyframes hero-zoom-out {
+  from { transform: scale(1.18); }
+  to   { transform: scale(1.0); }
+}
+.hero-overlay {
+  z-index: 1;
+}
+.hero-overlay::before {
+  content: '';
+  position: absolute;
+  width: clamp(90px, 14vw, 160px);
+  height: clamp(123px, 19vw, 218px); /* width × 30/22 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 30' fill='white'%3E%3Crect x='9' y='0' width='4' height='30' rx='0.5'/%3E%3Crect x='4.5' y='3' width='13' height='2.8' rx='0.5'/%3E%3Crect x='0' y='11' width='22' height='3.5' rx='0.5'/%3E%3Cpolygon points='2.5%2C20 19.5%2C24.5 19.5%2C22 2.5%2C17.5'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.12;
+  filter: blur(3px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--orthodox-blue) 0%, #1a1a2e 50%, #0a2a6e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 56, 147, 0.45) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-title {
+  font-family: 'Orthodox', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--primary-gold);
+  text-shadow: 2px 3px 12px rgba(0, 0, 0, 0.6);
+  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+}
+
+.hero-tagline {
+  font-family: 'PT Serif', serif;
+  font-size: 1.2rem;
+  color: var(--cream);
+  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+  max-width: 620px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   PAGE HERO (Inner Pages)
+   ============================================================ */
+.page-hero {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 20, 60, 0.62) 0%,
+      rgba(0, 10, 40, 0.72) 100%
+    ),
+    url('../assets/images/header.png') center 12% / 100% auto no-repeat;
+  padding: 44px 16px; /* mobile-first base — desktop override below */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Desktop only — big hero with zoom-out animation */
+@keyframes page-hero-zoom-out {
+  from { background-size: 115% auto; }
+  to   { background-size: 100% auto; }
+}
+@media (min-width: 1025px) {
+  .page-hero {
+    padding: 138px 20px;
+    min-height: 380px;
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(0, 20, 60, 0.62) 0%,
+        rgba(0, 10, 40, 0.72) 100%
+      ),
+      url('../assets/images/header.png') center 12% / 110% auto no-repeat;
+    animation: page-hero-zoom-out 7s ease-out forwards;
+  }
+}
+
+.page-hero-title {
+  font-family: 'Orthodox', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--primary-gold);
+  margin-bottom: 12px;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.35); /* keep text sharp above cross */
+}
+
+.page-hero-subtitle {
+  font-family: 'PT Serif', serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.88);
+  position: relative;
+  z-index: 1;
+}
+
+/* Container inside hero sits above the cross */
+.page-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section {
+  padding: 80px 20px;
+}
+.section-alt {
+  background: var(--cream);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Orthodox', serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--orthodox-blue);
+  text-align: center;
+  margin-bottom: 14px;
+  letter-spacing: 0.06em;
+}
+
+.section-divider {
+  width: 260px;
+  height: 1px;
+  margin: 0 auto 44px;
+  background: linear-gradient(to right, transparent, #D4AF37 20%, #D4AF37 80%, transparent);
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 20px var(--blue-light);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 36px rgba(0, 56, 147, 0.14);
+}
+
+.card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.card-title {
+  font-family: 'Orthodox', serif;
+  font-size: 1.15rem;
+  color: var(--dark-text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.card-date {
+  font-size: 0.85rem;
+  color: var(--primary-gold);
+  font-weight: 700;
+  font-family: 'Orthodox', serif;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.card-text {
+  font-size: 0.9375rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   SERVICE SCHEDULE
+   ============================================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 18px;
+}
+
+.service-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  box-shadow: 0 2px 16px var(--blue-light);
+  border-left: 4px solid var(--primary-gold);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.service-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 24px rgba(0, 56, 147, 0.12);
+}
+
+.service-icon {
+  font-size: 1.75rem;
+  width: 44px;
+  text-align: center;
+  flex-shrink: 0;
+  color: var(--primary-gold);
+}
+
+.service-name {
+  font-family: 'Orthodox', serif;
+  font-size: 0.9375rem;
+  color: var(--dark-text);
+  font-weight: 600;
+}
+
+.service-time {
+  font-size: 0.9rem;
+  color: var(--primary-gold);
+  font-weight: 700;
+  margin-top: 4px;
+  font-family: 'Orthodox', serif;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  font-family: 'Orthodox', serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--primary-gold);
+  color: white;
+  border-color: var(--primary-gold);
+}
+.btn-primary:hover {
+  background: var(--orthodox-blue);
+  border-color: var(--orthodox-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,56,147,0.25);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-gold);
+  border-color: var(--primary-gold);
+}
+.btn-secondary:hover {
+  background: var(--primary-gold);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(212,175,55,0.3);
+}
+
+.btn-red {
+  background: var(--bulgarian-red);
+  color: white;
+  border-color: var(--bulgarian-red);
+}
+.btn-red:hover {
+  background: #b51e0e;
+  border-color: #b51e0e;
+}
+
+/* ============================================================
+   QUICK ACTIONS
+   ============================================================ */
+.quick-actions {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ============================================================
+   ACCORDION
+   ============================================================ */
+.accordion {
+  border: 1px solid rgba(0, 56, 147, 0.12);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 10px;
+  background: white;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  cursor: pointer;
+  background: white;
+  transition: background var(--transition);
+  user-select: none;
+  gap: 16px;
+}
+.accordion-header:hover,
+.accordion.open .accordion-header {
+  background: var(--cream);
+}
+
+.accordion-title {
+  font-family: 'Orthodox', serif;
+  font-size: 1.05rem;
+  color: var(--orthodox-blue);
+  flex: 1;
+}
+
+.accordion-icon {
+  font-size: 0.875rem;
+  color: var(--primary-gold);
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+.accordion.open .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, padding var(--transition);
+  padding: 0 24px;
+}
+.accordion.open .accordion-body {
+  max-height: 3000px;
+  padding: 0 24px 24px;
+}
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.timeline {
+  position: relative;
+  padding-left: 44px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary-gold), var(--orthodox-blue), var(--primary-gold));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -36px;
+  top: 20px;
+  width: 18px;
+  height: 18px;
+  background: var(--primary-gold);
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--primary-gold);
+  z-index: 1;
+}
+
+.timeline-date {
+  font-family: 'Orthodox', serif;
+  font-size: 0.8rem;
+  color: var(--bulgarian-red);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.timeline-content {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.timeline-content:hover {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   PERSON / STAFF CARDS
+   ============================================================ */
+.person-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 20px var(--blue-light);
+  text-align: center;
+  padding: 30px 24px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.person-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(0,56,147,0.14);
+}
+
+.person-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-gold);
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.person-photo-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--primary-gold);
+  background: linear-gradient(135deg, var(--cream), var(--light-gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0 auto 16px;
+}
+
+.person-name {
+  font-family: 'Orthodox', serif;
+  font-size: 1.15rem;
+  color: var(--dark-text);
+  margin-bottom: 6px;
+}
+
+.person-title {
+  font-size: 0.8rem;
+  color: var(--primary-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Orthodox', serif;
+  margin-bottom: 12px;
+}
+
+.person-info {
+  font-size: 0.9375rem;
+  color: #555;
+  line-height: 1.7;
+  font-family: 'PT Serif', serif;
+}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  cursor: pointer;
+  aspect-ratio: 4 / 3;
+  background: var(--cream);
+}
+
+.gallery-item img,
+.gallery-item .gallery-img-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+.gallery-item:hover img,
+.gallery-item:hover .gallery-img-placeholder {
+  transform: scale(1.06);
+}
+
+.gallery-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, var(--cream), var(--light-gold));
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 56, 147, 0.55);
+  opacity: 0;
+  transition: opacity var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay span { color: white; font-size: 1.75rem; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.active { display: flex; }
+
+.lightbox-img {
+  max-width: 88vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+
+.lightbox-placeholder {
+  width: 600px;
+  max-width: 88vw;
+  height: 400px;
+  background: linear-gradient(135deg, var(--dark-text), var(--orthodox-blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+  border-radius: 8px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  color: white;
+  font-size: 2.2rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition);
+  line-height: 1;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+.lightbox-prev, .lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background var(--transition);
+  line-height: 1;
+}
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+.lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.25); }
+
+/* ============================================================
+   HALL FEATURES GRID
+   ============================================================ */
+.hall-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.feature-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 2px 16px var(--blue-light);
+  border-top: 4px solid var(--primary-gold);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,56,147,0.14);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.feature-title {
+  font-family: 'Orthodox', serif;
+  font-size: 1rem;
+  color: var(--orthodox-blue);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.feature-detail {
+  font-size: 0.9375rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   FILTER BAR
+   ============================================================ */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.filter-btn {
+  padding: 8px 20px;
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  border-radius: 24px;
+  background: transparent;
+  color: var(--dark-text);
+  font-family: 'Orthodox', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--primary-gold);
+  color: white;
+  border-color: var(--primary-gold);
+  box-shadow: 0 2px 12px rgba(212,175,55,0.3);
+}
+
+/* ============================================================
+   CONTACT CARDS
+   ============================================================ */
+.contact-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: 0 2px 16px var(--blue-light);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+  transition: transform var(--transition), box-shadow var(--transition);
+  border-left: 3px solid var(--primary-gold);
+}
+.contact-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 24px rgba(0,56,147,0.12);
+}
+
+.contact-icon {
+  font-size: 1.6rem;
+  width: 44px;
+  text-align: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contact-label {
+  font-family: 'Orthodox', serif;
+  font-size: 0.75rem;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.contact-value {
+  font-size: 1rem;
+  color: var(--dark-text);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.contact-sub {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 4px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 16px var(--blue-light);
+}
+
+.info-table thead tr {
+  background: var(--orthodox-blue);
+}
+
+.info-table th {
+  color: white;
+  font-family: 'Orthodox', serif;
+  font-size: 0.82rem;
+  padding: 14px 18px;
+  text-align: left;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.info-table td {
+  padding: 13px 18px;
+  border-bottom: 1px solid rgba(0, 56, 147, 0.08);
+  font-size: 0.9375rem;
+  color: var(--dark-text);
+}
+
+.info-table tr:nth-child(even) td {
+  background: var(--cream);
+}
+
+.info-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================================================
+   BULLETINS
+   ============================================================ */
+.bulletin-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: 0 2px 12px var(--blue-light);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform var(--transition), box-shadow var(--transition);
+  border-left: 3px solid var(--bulgarian-red);
+}
+.bulletin-card:hover {
+  transform: translateX(3px);
+  box-shadow: 0 4px 20px rgba(0,56,147,0.12);
+}
+
+.bulletin-icon {
+  font-size: 2.2rem;
+  color: var(--bulgarian-red);
+  flex-shrink: 0;
+}
+
+.bulletin-title {
+  font-family: 'Orthodox', serif;
+  font-size: 0.9375rem;
+  color: var(--dark-text);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.bulletin-meta {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* ============================================================
+   IMG PLACEHOLDER
+   ============================================================ */
+.img-placeholder {
+  background: linear-gradient(135deg, var(--cream) 0%, var(--light-gold) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--dark-text);
+  color: white;
+  padding: 60px 20px 30px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 40px;
+  max-width: var(--max-width);
+  margin: 0 auto 40px;
+}
+
+.footer-section h3 {
+  font-family: 'Orthodox', serif;
+  font-size: 0.9rem;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.footer-section p {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.9;
+}
+
+.footer-section a {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  display: block;
+  line-height: 1.9;
+  transition: color var(--transition);
+}
+.footer-section a:hover { color: var(--primary-gold); }
+
+.footer-cross {
+  font-size: 1.6rem;
+  color: var(--primary-gold);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ============================================================
+   SCROLL TO TOP
+   ============================================================ */
+.scroll-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 46px;
+  height: 46px;
+  background: var(--primary-gold);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+.scroll-top:hover {
+  background: var(--orthodox-blue);
+  transform: translateY(-3px);
+}
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.text-center { text-align: center; }
+.text-gold { color: var(--primary-gold); }
+.text-blue { color: var(--orthodox-blue); }
+.text-red { color: var(--bulgarian-red); }
+.mt-8  { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-40 { margin-top: 40px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-40 { margin-bottom: 40px; }
+.hidden { display: none !important; }
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* ============================================================
+   BLOCKQUOTE / SCRIPTURE
+   ============================================================ */
+.scripture-quote {
+  font-family: 'PT Serif', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--orthodox-blue);
+  line-height: 1.75;
+  border-left: 4px solid var(--primary-gold);
+  padding: 20px 28px;
+  background: white;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  box-shadow: 0 2px 16px var(--blue-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+.scripture-citation {
+  font-family: 'Orthodox', serif;
+  font-size: 0.875rem;
+  color: var(--primary-gold);
+  font-style: normal;
+  display: block;
+  margin-top: 10px;
+  text-align: right;
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+.breadcrumb {
+  background: var(--cream);
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0,56,147,0.07);
+  font-size: 0.875rem;
+  color: #666;
+}
+.breadcrumb-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.breadcrumb a {
+  color: var(--orthodox-blue);
+  text-decoration: none;
+}
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb-sep { margin: 0 8px; color: var(--primary-gold); }
+
+/* ============================================================
+   STAFF CARD (detailed)
+   ============================================================ */
+.staff-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 24px var(--blue-light);
+  overflow: hidden;
+}
+.staff-card-header {
+  background: linear-gradient(135deg, var(--orthodox-blue), var(--dark-text));
+  padding: 32px 24px;
+  text-align: center;
+}
+.staff-card-body {
+  padding: 28px;
+}
+.staff-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.staff-info-row:last-child { margin-bottom: 0; }
+.staff-info-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.staff-info-label {
+  font-family: 'Orthodox', serif;
+  font-size: 0.72rem;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 3px;
+}
+.staff-info-value {
+  font-size: 0.9375rem;
+  color: #555;
+  line-height: 1.6;
+}
+.staff-info-value a { color: var(--orthodox-blue); text-decoration: none; }
+.staff-info-value a:hover { text-decoration: underline; }
+
+/* ============================================================
+   PAGE LOADER
+   ============================================================ */
+#page-loader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, #001a4d 0%, #003893 55%, #001233 100%);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#page-loader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-cross-wrap {
+  margin-bottom: 24px;
+  animation: loader-pulse 2s ease-in-out infinite;
+}
+.loader-cross-wrap svg { display: block; width: 56px; height: 76px; fill: #D4AF37; filter: drop-shadow(0 0 18px rgba(212,175,55,0.6)); }
+@keyframes loader-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.93); opacity: 0.75; }
+}
+.loader-title {
+  font-family: 'Orthodox', serif;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: #D4AF37;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.loader-subtitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: 0.04em;
+}
+.loader-bar {
+  width: min(220px, 60vw);
+  height: 2px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.loader-progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #D4AF37, #fff8dc, #D4AF37);
+  border-radius: 2px;
+  animation: loader-fill 2.4s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes loader-fill {
+  0%   { width: 0%; }
+  60%  { width: 70%; }
+  100% { width: 100%; }
+}
+
+/* ============================================================
+   ORTHODOX CROSS ICON (replaces ✠)
+   ============================================================ */
+.orthodox-cross-icon {
+  display: inline-block;
+  width: 0.75em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  margin: 0 0.1em;
+  position: relative;
+  top: -0.06em;
+}
+.footer-cross .orthodox-cross-icon {
+  width: 1.6rem;
+  height: 2.1rem;
+  fill: var(--primary-gold);
+  display: block;
+  margin: 0 auto 10px;
+}
+.service-icon .orthodox-cross-icon {
+  width: 1.4rem;
+  height: 1.85rem;
+  fill: var(--primary-gold);
+}
+
+/* ============================================================
+   LIGHTBOX ENHANCEMENTS
+   ============================================================ */
+.lightbox-counter {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.55);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  pointer-events: none;
+  z-index: 10001;
+  background: rgba(0,0,0,0.3);
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.lightbox-caption {
+  display: none;
+  position: fixed;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 70vw;
+  color: rgba(255,255,255,0.85);
+  font-family: 'PT Serif', serif;
+  font-size: 0.88rem;
+  text-align: center;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lightbox-img {
+  animation: lb-fadein 0.22s ease;
+}
+@keyframes lb-fadein {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+#lightbox-content {
+  width: 100%;
+  min-height: 60vh;
+}
+
+/* ============================================================
+   HERO DOTS — hidden, slideshow runs without indicators
+   ============================================================ */
+.hero-dots {
+  display: none;
+}
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, transform 0.3s;
+}
+.hero-dot.active {
+  background: var(--primary-gold);
+  transform: scale(1.3);
+}
+.hero-dot:hover { background: rgba(255,255,255,0.8); }
+
+/* ============================================================
+   DROPDOWN NAVIGATION
+   ============================================================ */
+.nav-has-dropdown { position: relative; }
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  min-width: 220px;
+  background: white;
+  box-shadow: 0 12px 36px rgba(0,56,147,0.15), 0 2px 8px rgba(0,0,0,0.06);
+  border-radius: 0 0 10px 10px;
+  border-top: 3px solid var(--primary-gold);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
+  z-index: 1002;
+  padding: 6px 0;
+  transform: translateX(-50%) translateY(-8px);
+  pointer-events: none;
+}
+.nav-has-dropdown:hover .nav-dropdown,
+.nav-has-dropdown:focus-within .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: all;
+}
+.nav-dropdown li { display: block; }
+.nav-dropdown a {
+  padding: 11px 22px !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.04em !important;
+  color: var(--dark-text) !important;
+  display: block !important;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, padding-left 0.15s !important;
+}
+.nav-dropdown a:hover {
+  background: var(--cream);
+  color: var(--primary-gold) !important;
+  padding-left: 28px !important;
+  border-bottom: none !important;
+}
+
+.nav-arrow {
+  font-size: 0.5rem;
+  vertical-align: middle;
+  transition: transform 0.22s ease;
+  display: inline-block;
+  margin-left: 2px;
+}
+.nav-has-dropdown:hover .nav-arrow { transform: rotate(180deg); }
+
+/* Mobile dropdown accordion */
+.nav-dropdown-mobile {
+  display: none;
+  flex-direction: column;
+  background: var(--cream);
+  border-left: 3px solid var(--primary-gold);
+  margin-left: 0;
+}
+.nav-dropdown-mobile.open { display: flex; }
+.nav-dropdown-mobile a {
+  padding: 12px 36px !important;
+  font-size: 0.78rem !important;
+  border-bottom: 1px solid rgba(0,56,147,0.05) !important;
+  border-left: none !important;
+}
+.nav-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-gold);
+  font-size: 0.7rem;
+  transition: transform 0.22s;
+  padding: 4px;
+  display: none;
+}
+.nav-toggle-btn.rotated { transform: rotate(180deg); }
+
+/* ============================================================
+   ACTION CARDS GRID (Homepage)
+   ============================================================ */
+.action-cards-section {
+  padding: 64px 20px;
+  background: white;
+}
+.action-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.action-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px 16px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,56,147,0.09);
+  border-top: 4px solid var(--primary-gold);
+  text-decoration: none;
+  color: var(--dark-text);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-top-color 0.28s ease;
+  display: block;
+}
+.action-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 44px rgba(0,56,147,0.16);
+  border-top-color: var(--orthodox-blue);
+}
+.action-card-icon {
+  font-size: 2.4rem;
+  margin-bottom: 14px;
+  display: block;
+  line-height: 1;
+}
+.action-card-title {
+  font-family: 'Orthodox', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--orthodox-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 6px;
+}
+.action-card-desc {
+  font-size: 0.78rem;
+  color: #888;
+  line-height: 1.5;
+}
+.action-card.card-donate {
+  background: linear-gradient(145deg, #b51e0e, #8a1609);
+  border-top-color: var(--primary-gold);
+}
+.action-card.card-donate .action-card-title { color: var(--primary-gold); }
+.action-card.card-donate .action-card-desc { color: rgba(255,255,255,0.8); }
+.action-card.card-donate:hover { box-shadow: 0 16px 44px rgba(181,30,14,0.3); border-top-color: var(--primary-gold); }
+
+/* ============================================================
+   EVENTS SECTION WITH MINI CALENDAR
+   ============================================================ */
+.events-section { padding: 80px 20px; background: var(--cream); }
+.events-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 48px;
+  align-items: start;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Mini Calendar */
+.mini-calendar {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 24px rgba(0,56,147,0.1);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+.mini-cal-header {
+  background: var(--orthodox-blue);
+  color: white;
+  padding: 22px 20px 16px;
+  text-align: center;
+}
+.mini-cal-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.mini-cal-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  line-height: 1;
+}
+.mini-cal-btn:hover { background: rgba(255,255,255,0.28); }
+.mini-cal-month-label {
+  font-family: 'Orthodox', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.mini-cal-year-label {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+.mini-cal-grid { padding: 14px 14px 12px; }
+.mini-cal-day-headers {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 6px;
+}
+.mini-cal-day-header {
+  text-align: center;
+  font-family: 'Orthodox', serif;
+  font-size: 0.6rem;
+  color: var(--primary-gold);
+  letter-spacing: 0.05em;
+  padding: 4px 0;
+}
+.mini-cal-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.mini-cal-date {
+  text-align: center;
+  padding: 7px 2px;
+  font-size: 0.78rem;
+  border-radius: 6px;
+  cursor: default;
+  transition: all 0.18s;
+  color: var(--dark-text);
+  line-height: 1;
+}
+.mini-cal-date.empty { opacity: 0; pointer-events: none; }
+.mini-cal-date.other-month { color: #bbb; }
+.mini-cal-date.sunday { color: var(--bulgarian-red); }
+.mini-cal-date.today {
+  background: var(--orthodox-blue);
+  color: white !important;
+  font-weight: 700;
+}
+.mini-cal-date.has-event {
+  background: rgba(212,175,55,0.18);
+  color: var(--orthodox-blue);
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid rgba(212,175,55,0.5);
+}
+.mini-cal-date.has-event:hover {
+  background: var(--primary-gold);
+  color: white !important;
+}
+.mini-cal-date.has-feast {
+  background: rgba(214,38,18,0.1);
+  color: var(--bulgarian-red);
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid rgba(214,38,18,0.3);
+}
+.mini-cal-date.has-feast:hover {
+  background: var(--bulgarian-red);
+  color: white !important;
+}
+.cal-legend {
+  padding: 10px 14px 14px;
+  display: flex;
+  gap: 16px;
+  font-size: 0.7rem;
+  color: #777;
+  flex-wrap: wrap;
+}
+.cal-legend-item { display: flex; align-items: center; gap: 5px; }
+.cal-legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Upcoming Events List */
+.upcoming-events-list { display: flex; flex-direction: column; gap: 14px; }
+.event-item {
+  display: flex;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 14px rgba(0,56,147,0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 4px solid var(--primary-gold);
+}
+.event-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 6px 24px rgba(0,56,147,0.13);
+}
+.event-item.feast-day { border-left-color: var(--bulgarian-red); }
+.event-item.community-event { border-left-color: var(--orthodox-blue); }
+.event-date-badge {
+  background: var(--orthodox-blue);
+  color: white;
+  min-width: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.event-date-badge.badge-red { background: var(--bulgarian-red); }
+.event-date-badge.badge-gold { background: var(--primary-gold); }
+.events-month-heading {
+  font-family: 'Orthodox', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orthodox-blue);
+  border-bottom: 2px solid var(--primary-gold);
+  padding-bottom: 6px;
+  margin: 18px 0 6px;
+}
+.event-date-day {
+  font-family: 'Orthodox', serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.event-date-month {
+  font-family: 'Orthodox', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  opacity: 0.88;
+}
+.event-info {
+  flex: 1;
+  padding: 14px 18px;
+}
+.event-title {
+  font-family: 'Orthodox', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.event-time {
+  font-size: 0.78rem;
+  color: var(--primary-gold);
+  font-weight: 600;
+  font-family: 'Orthodox', serif;
+  margin-bottom: 3px;
+}
+.event-desc {
+  font-size: 0.78rem;
+  color: #888;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   SCRIPTURE BANNER
+   ============================================================ */
+.scripture-banner {
+  background: linear-gradient(135deg, var(--orthodox-blue) 0%, #1a2e5e 100%);
+  padding: 50px 20px;
+  text-align: center;
+  border-top: 4px solid var(--primary-gold);
+  border-bottom: 4px solid var(--primary-gold);
+}
+.scripture-banner blockquote {
+  font-family: 'PT Serif', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.92);
+  max-width: 700px;
+  margin: 0 auto 14px;
+  line-height: 1.85;
+}
+.scripture-banner cite {
+  font-family: 'Orthodox', serif;
+  font-size: 0.85rem;
+  color: var(--primary-gold);
+  font-style: normal;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   NEWSLETTER SIGNUP SECTION
+   ============================================================ */
+.newsletter-section {
+  background: linear-gradient(135deg, #1a2a4e 0%, var(--dark-text) 100%);
+  padding: 72px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.newsletter-section::before {
+  content: '✉';
+  position: absolute;
+  font-size: 22rem;
+  opacity: 0.025;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  pointer-events: none;
+  line-height: 1;
+}
+.newsletter-content {
+  max-width: 580px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.newsletter-icon-large { font-size: 3rem; margin-bottom: 16px; display: block; }
+.newsletter-title {
+  font-family: 'Orthodox', serif;
+  font-size: 1.9rem;
+  color: var(--primary-gold);
+  margin-bottom: 12px;
+  letter-spacing: 0.06em;
+}
+.newsletter-subtitle {
+  font-family: 'PT Serif', serif;
+  color: rgba(255,255,255,0.78);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 34px;
+}
+.newsletter-form-inline {
+  display: flex;
+  gap: 10px;
+  max-width: 480px;
+  margin: 0 auto 14px;
+}
+.newsletter-form-inline input[type="email"] {
+  flex: 1;
+  padding: 14px 18px;
+  border: 2px solid rgba(212,175,55,0.35);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.newsletter-form-inline input[type="email"]::placeholder { color: rgba(255,255,255,0.45); }
+.newsletter-form-inline input[type="email"]:focus {
+  border-color: var(--primary-gold);
+  background: rgba(255,255,255,0.12);
+}
+.newsletter-privacy-note { font-size: 0.72rem; color: rgba(255,255,255,0.38); margin-top: 12px; }
+.newsletter-success-msg {
+  display: none;
+  padding: 16px 24px;
+  background: rgba(212,175,55,0.15);
+  border: 1px solid var(--primary-gold);
+  border-radius: 8px;
+  color: var(--primary-gold);
+  font-family: 'Orthodox', serif;
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   DONATION SECTION
+   ============================================================ */
+.donation-section { padding: 80px 20px; background: var(--cream); }
+.donation-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.donation-text h2 {
+  font-family: 'Orthodox', serif;
+  font-size: 1.9rem;
+  color: var(--orthodox-blue);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.donation-text .section-divider { margin: 0 0 20px; }
+.donation-text p { color: #555; line-height: 1.85; margin-bottom: 18px; font-size: 0.95rem; }
+.donation-scripture {
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  color: var(--orthodox-blue);
+  border-left: 3px solid var(--primary-gold);
+  padding: 12px 18px;
+  background: white;
+  border-radius: 0 8px 8px 0;
+  margin: 20px 0 28px;
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+.donation-ways {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 28px rgba(0,56,147,0.09);
+  overflow: hidden;
+}
+.donation-ways-header {
+  background: var(--orthodox-blue);
+  color: white;
+  padding: 22px 28px;
+}
+.donation-ways-header h3 {
+  font-family: 'Orthodox', serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+.donation-ways-body { padding: 8px 0; }
+.donation-way-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(0,56,147,0.07);
+  transition: background 0.18s;
+}
+.donation-way-item:last-child { border-bottom: none; }
+.donation-way-item:hover { background: var(--cream); }
+.donation-way-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
+.donation-way-title {
+  font-family: 'Orthodox', serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 4px;
+}
+.donation-way-desc { font-size: 0.82rem; color: #777; line-height: 1.6; }
+.donation-way-desc a { color: var(--orthodox-blue); }
+.donation-way-desc a:hover { text-decoration: underline; }
+
+/* ============================================================
+   FLOATING ACTION BUTTONS (FABs)
+   ============================================================ */
+.fab-container {
+  position: fixed;
+  right: 28px;
+  bottom: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 997;
+}
+.fab-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: opacity 0.32s ease, transform 0.32s ease, visibility 0.32s ease, box-shadow 0.22s;
+  text-decoration: none;
+  color: white;
+  opacity: 0;
+  transform: translateX(20px);
+  visibility: hidden;
+  position: relative;
+  background: var(--orthodox-blue);
+}
+.fab-btn.visible {
+  opacity: 1;
+  transform: translateX(0);
+  visibility: visible;
+}
+.fab-btn:hover {
+  transform: translateX(-4px) scale(1.08);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+}
+.fab-donate { background: var(--bulgarian-red); transition-delay: 0.05s; }
+.fab-events { background: var(--orthodox-blue); transition-delay: 0.1s; }
+.fab-newsletter-btn { background: var(--primary-gold); transition-delay: 0.15s; }
+/* Tooltip */
+.fab-btn[title]::before {
+  content: attr(title);
+  position: absolute;
+  right: calc(100% + 10px);
+  background: rgba(26,26,46,0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: 'Orthodox', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.18s;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.fab-btn[title]:hover::before { opacity: 1; }
+
+/* ============================================================
+   NEWSLETTER MODAL
+   ============================================================ */
+.newsletter-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 10001;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.newsletter-modal-overlay.open { opacity: 1; visibility: visible; }
+.newsletter-modal-box {
+  background: white;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  padding: 48px 36px 36px;
+  text-align: center;
+  position: relative;
+  transform: scale(0.88) translateY(20px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.28);
+  border-top: 5px solid var(--primary-gold);
+}
+.newsletter-modal-overlay.open .newsletter-modal-box { transform: scale(1) translateY(0); }
+.newsletter-modal-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  background: var(--cream);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #888;
+  width: 32px; height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+.newsletter-modal-close:hover { background: #eee; color: var(--dark-text); }
+.newsletter-modal-icon { font-size: 3.5rem; margin-bottom: 14px; display: block; }
+.newsletter-modal-title {
+  font-family: 'Orthodox', serif;
+  font-size: 1.35rem;
+  color: var(--orthodox-blue);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.newsletter-modal-desc { color: #666; font-size: 0.88rem; line-height: 1.75; margin-bottom: 26px; }
+.newsletter-modal-form { display: flex; flex-direction: column; gap: 12px; }
+.newsletter-modal-form input {
+  padding: 13px 16px;
+  border: 2px solid rgba(0,56,147,0.14);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Open Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.newsletter-modal-form input:focus { border-color: var(--primary-gold); }
+.newsletter-modal-privacy { font-size: 0.7rem; color: #bbb; margin-top: 10px; }
+.newsletter-modal-thanks {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
+.newsletter-modal-thanks .thanks-icon { font-size: 3rem; display: block; margin-bottom: 12px; }
+.newsletter-modal-thanks h3 {
+  font-family: 'Orthodox', serif;
+  color: var(--orthodox-blue);
+  margin-bottom: 8px;
+}
+.newsletter-modal-thanks p { color: #666; font-size: 0.875rem; }
+
+/* ============================================================
+   SOCIAL MEDIA
+   ============================================================ */
+.social-links { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.social-link {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  text-decoration: none !important;
+  transition: all 0.2s;
+  border: 1px solid rgba(255,255,255,0.15);
+  line-height: 1;
+}
+.social-link svg {
+  display: block;
+  flex-shrink: 0;
+}
+.social-link:hover {
+  background: var(--primary-gold);
+  color: white !important;
+  border-color: var(--primary-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(212,175,55,0.35);
+}
+
+/* ============================================================
+   RESPONSIVE — New Elements
+   ============================================================ */
+@media (max-width: 1024px) {
+  .action-cards-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .events-layout { grid-template-columns: 1fr; gap: 32px; }
+  .mini-calendar { position: static; }
+  .donation-layout { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (max-width: 768px) {
+  .action-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .action-card { padding: 24px 12px 18px; }
+  .action-card-icon { font-size: 2rem; }
+  .newsletter-form-inline { flex-direction: column; }
+  .newsletter-form-inline input[type="email"] { width: 100%; }
+  .newsletter-title { font-size: 1.5rem; }
+  .fab-container { right: 16px; bottom: 82px; }
+  .fab-btn { width: 46px; height: 46px; font-size: 1.1rem; }
+  .fab-btn[title]::before { display: none; }
+  .donation-layout { grid-template-columns: 1fr; }
+  .events-layout { grid-template-columns: 1fr; }
+  .nav-dropdown { display: none !important; }
+  .nav-toggle-btn { display: flex !important; }
+}
+@media (max-width: 480px) {
+  .action-cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .newsletter-modal-box { padding: 40px 24px 28px; }
+  .newsletter-title { font-size: 1.3rem; }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .page-hero { animation: none !important; }
+}

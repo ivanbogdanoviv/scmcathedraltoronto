@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="22" viewBox="0 0 100 22">
+  <!-- Dark background -->
+  <rect width="100" height="22" fill="#19080A"/>
+  <!-- Outer gold lines -->
+  <line x1="0" y1="1.25" x2="100" y2="1.25" stroke="#D4AF37" stroke-width="2"/>
+  <line x1="0" y1="20.75" x2="100" y2="20.75" stroke="#D4AF37" stroke-width="2"/>
+  <!-- Inner secondary lines -->
+  <line x1="0" y1="3.75" x2="100" y2="3.75" stroke="#B8860B" stroke-width="0.6" opacity="0.55"/>
+  <line x1="0" y1="18.25" x2="100" y2="18.25" stroke="#B8860B" stroke-width="0.6" opacity="0.55"/>
+  <!-- Wave 1: curves upward first -->
+  <path d="M0,11 C6.25,3.2 18.75,3.2 25,11 C31.25,18.8 43.75,18.8 50,11 C56.25,3.2 68.75,3.2 75,11 C81.25,18.8 93.75,18.8 100,11"
+        stroke="#C4991C" stroke-width="1.35" fill="none" stroke-linecap="round"/>
+  <!-- Wave 2: curves downward first -->
+  <path d="M0,11 C6.25,18.8 18.75,18.8 25,11 C31.25,3.2 43.75,3.2 50,11 C56.25,18.8 68.75,18.8 75,11 C81.25,3.2 93.75,3.2 100,11"
+        stroke="#C4991C" stroke-width="1.35" fill="none" stroke-linecap="round"/>
+  <!-- Diamond accents at the two wave crossing points (x=25, x=75) -->
+  <polygon points="25,8.5 27.5,11 25,13.5 22.5,11" fill="#D4AF37"/>
+  <polygon points="75,8.5 77.5,11 75,13.5 72.5,11" fill="#D4AF37"/>
+  <!-- Small dot ornaments at loop peaks/troughs (centres of enclosed arcs) -->
+  <circle cx="12.5" cy="5.2" r="1.25" fill="#D4AF37" opacity="0.72"/>
+  <circle cx="37.5" cy="16.8" r="1.25" fill="#D4AF37" opacity="0.72"/>
+  <circle cx="62.5" cy="5.2" r="1.25" fill="#D4AF37" opacity="0.72"/>
+  <circle cx="87.5" cy="16.8" r="1.25" fill="#D4AF37" opacity="0.72"/>
+  <!-- Tiny cross marks at tile midpoint (x=50) as extra accent -->
+  <line x1="49" y1="11" x2="51" y2="11" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"/>
+  <line x1="50" y1="10" x2="50" y2="12" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"/>
+</svg>

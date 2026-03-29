@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Make a donation to Sts. Cyril and Methody Cathedral Toronto. Support our parish ministry, building fund, and community outreach.">
+  <meta name="keywords" content="donate Bulgarian Orthodox church Toronto, church donation, Orthodox charity Toronto">
+  <title>Make a Donation — Sts. Cyril and Methody Cathedral Toronto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="icon" type="image/png" href="assets/images/icons/logo.png">
+  <style>
+    .donate-hero {
+      background: linear-gradient(145deg, #8a1609 0%, #b51e0e 50%, #003893 100%);
+      padding: 70px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .donate-hero::before {
+      content: '❤';
+      position: absolute;
+      font-size: 20rem;
+      opacity: 0.04;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      line-height: 1;
+    }
+    .donate-hero-title {
+      font-family: 'Orthodox', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: var(--primary-gold);
+      margin-bottom: 14px;
+      letter-spacing: 0.08em;
+      position: relative;
+    }
+    .donate-hero-sub {
+      font-family: 'PT Serif', serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+    }
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .amount-btn {
+      padding: 18px 12px;
+      border: 2px solid rgba(0,56,147,0.2);
+      border-radius: 8px;
+      background: white;
+      font-family: 'Orthodox', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--orthodox-blue);
+      cursor: pointer;
+      transition: all 0.22s;
+      text-align: center;
+    }
+    .amount-btn:hover, .amount-btn.selected {
+      background: var(--orthodox-blue);
+      color: white;
+      border-color: var(--orthodox-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,56,147,0.22);
+    }
+    .amount-btn .amount-label {
+      font-size: 0.65rem;
+      opacity: 0.8;
+      display: block;
+      margin-top: 4px;
+      letter-spacing: 0.06em;
+      font-weight: 400;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .donate-form-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0,56,147,0.12);
+      overflow: hidden;
+      max-width: 560px;
+    }
+    .donate-form-header {
+      background: var(--orthodox-blue);
+      color: white;
+      padding: 24px 28px;
+    }
+    .donate-form-header h2 {
+      font-family: 'Orthodox', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+    }
+    .donate-form-body { padding: 28px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-family: 'Orthodox', serif;
+      font-size: 0.72rem;
+      color: var(--primary-gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid rgba(0,56,147,0.14);
+      border-radius: 6px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      color: var(--dark-text);
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--primary-gold);
+    }
+    .form-group textarea { min-height: 80px; resize: vertical; }
+    .custom-amount-wrap {
+      position: relative;
+    }
+    .custom-amount-wrap::before {
+      content: '$';
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Orthodox', serif;
+      font-size: 1rem;
+      color: var(--primary-gold);
+      pointer-events: none;
+    }
+    .custom-amount-wrap input { padding-left: 30px; }
+    .impact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .impact-card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,56,147,0.08);
+      border-top: 4px solid var(--primary-gold);
+    }
+    .impact-amount {
+      font-family: 'Orthodox', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--bulgarian-red);
+      margin-bottom: 8px;
+    }
+    .impact-desc {
+      font-size: 0.875rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    .tax-note {
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 0.82rem;
+      color: #555;
+      line-height: 1.65;
+      margin-top: 20px;
+    }
+    .tax-note strong { color: var(--orthodox-blue); }
+  </style>
+</head>
+<body>
+<div class="orth-border-top" aria-hidden="true"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+        <div class="header-inner">
+      <div class="header-center" style="text-align:center;">
+        <span class="cathedral-name" data-lang-key="cathedral_name">Sts. Cyril and Methody</span>
+        <p class="cathedral-subtitle" data-lang-key="cathedral_subtitle">Macedono-Bulgarian Eastern Orthodox Cathedral</p>
+        <p class="header-est"><span class="cross-divider" aria-hidden="true"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg></span> <span data-lang-key="est">EST. 1910</span> <span class="cross-divider" aria-hidden="true"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg></span></p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li><a href="index.html" data-lang-key="nav_home">HOME</a></li>
+
+        <li class="nav-has-dropdown">
+          <a href="parish.html" data-lang-key="nav_our_church">OUR CHURCH <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown" role="menu">
+            <li role="none"><a href="history.html" role="menuitem" data-lang-key="nav_history">History</a></li>
+            <li role="none"><a href="parish.html" role="menuitem" data-lang-key="nav_parish">Our Parish</a></li>
+            <li role="none"><a href="staff.html" role="menuitem" data-lang-key="nav_staff">Staff &amp; Office</a></li>
+          </ul>
+          <ul class="nav-dropdown-mobile" id="mobile-drop-church">
+            <li><a href="history.html" data-lang-key="nav_history">History</a></li>
+            <li><a href="parish.html" data-lang-key="nav_parish">Our Parish</a></li>
+            <li><a href="staff.html" data-lang-key="nav_staff">Staff &amp; Office</a></li>
+          </ul>
+          <button class="nav-toggle-btn" aria-label="Expand Our Church menu" data-target="mobile-drop-church">&#9662;</button>
+        </li>
+
+        <li class="nav-has-dropdown">
+          <a href="services.html" data-lang-key="nav_worship">WORSHIP <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown" role="menu">
+            <li role="none"><a href="services.html" role="menuitem" data-lang-key="nav_services">Divine Services</a></li>
+            <li role="none"><a href="events.html" role="menuitem" data-lang-key="nav_events">Events &amp; Calendar</a></li>
+          </ul>
+          <ul class="nav-dropdown-mobile" id="mobile-drop-worship">
+            <li><a href="services.html" data-lang-key="nav_services">Divine Services</a></li>
+            <li><a href="events.html" data-lang-key="nav_events">Events &amp; Calendar</a></li>
+          </ul>
+          <button class="nav-toggle-btn" aria-label="Expand Worship menu" data-target="mobile-drop-worship">&#9662;</button>
+        </li>
+
+        <li class="nav-has-dropdown">
+          <a href="activities.html" data-lang-key="nav_community">COMMUNITY <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown" role="menu">
+            <li role="none"><a href="activities.html" role="menuitem" data-lang-key="nav_activities">Activities</a></li>
+            <li role="none"><a href="news.html" role="menuitem" data-lang-key="nav_news">News</a></li>
+            <li role="none"><a href="school.html" role="menuitem" data-lang-key="nav_school">Sunday School</a></li>
+            <li role="none"><a href="gallery.html" role="menuitem" data-lang-key="nav_gallery">Photo Gallery</a></li>
+            <li role="none"><a href="bulletins.html" role="menuitem" data-lang-key="nav_bulletins">Parish Bulletins</a></li>
+          </ul>
+          <ul class="nav-dropdown-mobile" id="mobile-drop-community">
+            <li><a href="activities.html" data-lang-key="nav_activities">Activities</a></li>
+            <li><a href="news.html" data-lang-key="nav_news">News</a></li>
+            <li><a href="school.html" data-lang-key="nav_school">Sunday School</a></li>
+            <li><a href="gallery.html" data-lang-key="nav_gallery">Photo Gallery</a></li>
+            <li><a href="bulletins.html" data-lang-key="nav_bulletins">Parish Bulletins</a></li>
+          </ul>
+          <button class="nav-toggle-btn" aria-label="Expand Community menu" data-target="mobile-drop-community">&#9662;</button>
+        </li>
+
+        <li class="nav-has-dropdown">
+          <a href="membership.html" class="active" data-lang-key="nav_get_involved">GET INVOLVED <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown" role="menu">
+            <li role="none"><a href="membership.html" role="menuitem" data-lang-key="nav_membership">Become a Member</a></li>
+            <li role="none"><a href="donate.html" role="menuitem" class="active" data-lang-key="nav_donate">Make a Donation</a></li>
+            <li role="none"><a href="#newsletter-section" class="open-newsletter-trigger" role="menuitem" data-lang-key="nav_newsletter">E-Newsletter</a></li>
+          </ul>
+          <ul class="nav-dropdown-mobile" id="mobile-drop-involved">
+            <li><a href="membership.html" data-lang-key="nav_membership">Become a Member</a></li>
+            <li><a href="donate.html" class="active" data-lang-key="nav_donate">Make a Donation</a></li>
+            <li><a href="#newsletter-section" class="open-newsletter-trigger" data-lang-key="nav_newsletter">E-Newsletter</a></li>
+          </ul>
+          <button class="nav-toggle-btn" aria-label="Expand Get Involved menu" data-target="mobile-drop-involved">&#9662;</button>
+        </li>
+
+        <li><a href="halls.html" data-lang-key="nav_halls">HALLS FOR RENT</a></li>
+        <li><a href="contact.html" data-lang-key="nav_contact">CONTACT</a></li>
+        <li><a href="links.html" data-lang-key="nav_links">LINKS</a></li>
+      </ul>
+      <div class="lang-toggle" role="group" aria-label="Language selection">
+        <button class="lang-btn active" id="lang-en" data-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-separator" aria-hidden="true">|</span>
+        <button class="lang-btn" id="lang-bg" data-lang="bg" aria-pressed="false">БГ</button>
+      </div>
+    </div>
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- DONATE HERO -->
+    <section class="donate-hero" aria-label="Donation page">
+      <h1 class="donate-hero-title">Support Our Cathedral</h1>
+      <p class="donate-hero-sub">
+        Your generosity sustains our 116-year mission — preserving Orthodoxy, serving our community, and honouring the legacy of Sts. Cyril and Methody.
+      </p>
+    </section>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="breadcrumb-inner">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg></span>
+        <span>Make a Donation</span>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <section class="section" aria-labelledby="donate-main-heading">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 480px;gap:56px;align-items:start;">
+
+          <!-- LEFT: Why Donate -->
+          <div>
+            <h2 class="section-title" id="donate-main-heading" style="text-align:left;">Why Your Gift Matters</h2>
+            <div class="section-divider" style="margin-left:0;"></div>
+            <p style="color:#555;line-height:1.85;margin-bottom:20px;font-size:0.95rem;">
+              Since 1910, Sts. Cyril and Methody Cathedral has been a spiritual home for the Macedono-Bulgarian Orthodox community in Toronto. For over 116 years, the generosity of our parishioners has sustained this sacred place of worship.
+            </p>
+            <p style="color:#555;line-height:1.85;margin-bottom:36px;font-size:0.95rem;">
+              Your donation supports our clergy, maintains our historic building, funds our Bulgarian Sunday School, supports our choir, and enables us to serve those in need in our community.
+            </p>
+
+            <!-- Impact Cards -->
+            <h3 style="font-family:'Orthodox',serif;color:var(--orthodox-blue);font-size:1.1rem;margin-bottom:20px;letter-spacing:0.06em;">Your Gift in Action</h3>
+            <div class="impact-cards">
+              <div class="impact-card">
+                <div class="impact-amount">$25</div>
+                <div class="impact-desc">Provides candles and liturgical supplies for one Sunday service</div>
+              </div>
+              <div class="impact-card">
+                <div class="impact-amount">$50</div>
+                <div class="impact-desc">Supports one month of Sunday School materials for our children</div>
+              </div>
+              <div class="impact-card">
+                <div class="impact-amount">$100</div>
+                <div class="impact-desc">Contributes to church building maintenance and preservation</div>
+              </div>
+              <div class="impact-card">
+                <div class="impact-amount">$500</div>
+                <div class="impact-desc">Sponsors a Great Feast Divine Liturgy or memorial service</div>
+              </div>
+            </div>
+
+            <blockquote class="scripture-quote" style="margin-top:36px;">
+              "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."
+              <span class="scripture-citation">— 2 Corinthians 9:7</span>
+            </blockquote>
+
+            <!-- Ways to Give (other than form) -->
+            <div style="margin-top:40px;">
+              <h3 style="font-family:'Orthodox',serif;color:var(--orthodox-blue);font-size:1rem;margin-bottom:20px;letter-spacing:0.08em;">Other Ways to Give</h3>
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(0,56,147,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
+                  <span style="font-size:1.6rem;">📬</span>
+                  <div>
+                    <p style="font-family:'Orthodox',serif;font-size:0.875rem;font-weight:700;color:var(--dark-text);margin-bottom:4px;">Cheque by Mail</p>
+                    <p style="font-size:0.83rem;color:#777;line-height:1.6;">Make payable to <strong>"Sts. Cyril and Methody Cathedral"</strong> and mail to: 237 Sackville Street, Toronto, ON M5A 3G1</p>
+                  </div>
+                </div>
+                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(0,56,147,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
+                  <span style="font-size:1.6rem;">✉</span>
+                  <div>
+                    <p style="font-family:'Orthodox',serif;font-size:0.875rem;font-weight:700;color:var(--dark-text);margin-bottom:4px;">Sunday Offering Envelope</p>
+                    <p style="font-size:0.83rem;color:#777;line-height:1.6;">Offering envelopes are available in the narthex of the church every Sunday before Divine Liturgy.</p>
+                  </div>
+                </div>
+                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(0,56,147,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
+                  <span style="font-size:1.6rem;">☎</span>
+                  <div>
+                    <p style="font-family:'Orthodox',serif;font-size:0.875rem;font-weight:700;color:var(--dark-text);margin-bottom:4px;">By Phone</p>
+                    <p style="font-size:0.83rem;color:#777;line-height:1.6;">Call our office at <a href="tel:4163682828" style="color:var(--orthodox-blue);">416-368-2828</a> Mon–Fri 10AM–3PM to arrange your donation.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Donation Form -->
+          <div>
+            <div class="donate-form-card">
+              <div class="donate-form-header">
+                <h2>❤ Make a Donation</h2>
+              </div>
+              <div class="donate-form-body">
+
+                <!-- Via E-Transfer -->
+                <div style="background:rgba(212,175,55,0.08);border:2px solid rgba(212,175,55,0.4);border-radius:10px;padding:20px;margin-bottom:24px;text-align:center;">
+                  <p style="font-family:'Orthodox',serif;font-size:0.85rem;color:var(--orthodox-blue);margin-bottom:8px;font-weight:700;">FASTEST: INTERAC E-TRANSFER</p>
+                  <p style="font-size:0.9rem;color:#555;margin-bottom:12px;">Send directly to:</p>
+                  <p style="font-family:'Orthodox',serif;font-size:1rem;color:var(--bulgarian-red);font-weight:700;word-break:break-all;">scmcathedraltoronto@hotmail.com</p>
+                  <p style="font-size:0.78rem;color:#888;margin-top:8px;">No account required for the recipient. Message: "Donation – [your name]"</p>
+                </div>
+
+                <p style="font-family:'Orthodox',serif;font-size:0.7rem;color:#aaa;letter-spacing:0.1em;text-align:center;margin-bottom:16px;">— OR SEND US A MESSAGE —</p>
+
+                <!-- Contact / Pledge Form -->
+                <form id="donation-contact-form" novalidate>
+                  <div class="form-group">
+                    <label for="donor-name">Your Name *</label>
+                    <input type="text" id="donor-name" name="name" placeholder="Full Name" required autocomplete="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="donor-email">Email Address *</label>
+                    <input type="email" id="donor-email" name="email" placeholder="you@example.com" required autocomplete="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="donor-phone">Phone (optional)</label>
+                    <input type="tel" id="donor-phone" name="phone" placeholder="416-000-0000" autocomplete="tel">
+                  </div>
+                  <div class="form-group">
+                    <label for="donation-purpose">Donation Purpose</label>
+                    <select id="donation-purpose" name="purpose">
+                      <option value="general">General Parish Fund</option>
+                      <option value="building">Building Maintenance Fund</option>
+                      <option value="sunday-school">Bulgarian Sunday School</option>
+                      <option value="choir">Cathedral Choir</option>
+                      <option value="memorial">Memorial / Panikhida</option>
+                      <option value="feast">Great Feast Sponsorship</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="donation-message">Message to the Parish (optional)</label>
+                    <textarea id="donation-message" name="message" placeholder="Any special intentions, dedication, or notes..."></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-red" style="width:100%;padding:16px;font-size:0.9rem;">
+                    ❤ Submit Donation Intent
+                  </button>
+                  <p style="font-size:0.75rem;color:#aaa;text-align:center;margin-top:12px;line-height:1.5;">
+                    After submitting, our office will contact you within 1 business day to complete your donation.
+                  </p>
+                </form>
+
+                <div id="donation-success" style="display:none;text-align:center;padding:24px;">
+                  <svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true" style="width:2.5rem;height:3.2rem;fill:var(--primary-gold);display:block;margin-bottom:12px"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg>
+                  <h3 style="font-family:'Orthodox',serif;color:var(--orthodox-blue);margin-bottom:8px;">Thank You!</h3>
+                  <p style="color:#555;font-size:0.875rem;line-height:1.7;">Your donation intent has been received. Our office will reach out to you shortly. God bless your generosity!</p>
+                </div>
+
+                <div class="tax-note">
+                  <strong>Tax Receipt Information:</strong> Sts. Cyril and Methody Cathedral is a registered charitable organization in Canada. Official tax receipts are issued for donations of $20 or more upon request.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+<div class="orth-border-section" aria-hidden="true"></div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-section">
+        <span class="footer-cross" aria-hidden="true"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg></span>
+        <h3>Sts. Cyril &amp; Methody</h3>
+        <p>Macedono-Bulgarian Eastern Orthodox Cathedral<br>Toronto, Canada</p>
+        <p style="margin-top:10px">Est. 1910 &mdash; Serving our community for over 116 years</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>237 Sackville Street<br>Toronto, ON M5A 3G1</p>
+        <p>☎ <a href="tel:4163682828">416-368-2828</a></p>
+        <p>✉ <a href="mailto:scmcathedraltoronto@hotmail.com">scmcathedraltoronto@hotmail.com</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Service Schedule</h3>
+        <p>Sunday Divine Liturgy: 10:30 AM</p>
+        <p>Morning Service: 10:00 AM</p>
+        <p>Confession (Sun): 9:30 AM</p>
+        <p>Wednesday Akathist: 11:00 AM</p>
+        <p>Friday Akathist: 11:00 AM</p>
+        <p>Sat Great Vespers: 6:00 PM</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="services.html">Divine Services</a>
+        <a href="events.html">Events &amp; Calendar</a>
+        <a href="membership.html">Become a Member</a>
+        <a href="bulletins.html">Parish Bulletins</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sts. Cyril and Methody Macedono-Bulgarian Eastern Orthodox Cathedral, Toronto. All rights reserved.</p>
+      <p style="margin-top:6px">237 Sackville Street, Toronto, ON M5A 3G1 &nbsp;|&nbsp; Tel: 416-368-2828</p>
+    </div>
+  </footer>
+
+  <div class="fab-container" id="fab-container">
+    <a href="events.html" class="fab-btn fab-events" title="Upcoming Events" aria-label="View Upcoming Events">📅</a>
+    <button class="fab-btn fab-newsletter-btn" id="fab-newsletter-open" title="E-Newsletter" aria-label="Subscribe" type="button">✉</button>
+  </div>
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">&#8593;</button>
+
+  <div class="newsletter-modal-overlay" id="newsletter-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="newsletter-modal-box">
+      <button class="newsletter-modal-close" id="newsletter-modal-close" aria-label="Close">&times;</button>
+      <div id="newsletter-modal-form-wrap">
+        <span class="newsletter-modal-icon">✉</span>
+        <h2 class="newsletter-modal-title">Subscribe to Our E-Newsletter</h2>
+        <p class="newsletter-modal-desc">Stay connected with Sts. Cyril and Methody Cathedral. Receive Holy Day announcements, event news, and monthly bulletins.</p>
+        <form class="newsletter-modal-form" id="newsletter-modal-form" novalidate>
+          <input type="text" name="name" placeholder="Your Full Name" aria-label="Full name">
+          <input type="email" name="email" placeholder="Your Email Address" required aria-label="Email address">
+          <button type="submit" class="btn btn-primary">Subscribe Now</button>
+        </form>
+        <p class="newsletter-modal-privacy">We respect your privacy. Unsubscribe at any time.</p>
+      </div>
+      <div class="newsletter-modal-thanks" id="newsletter-modal-thanks">
+        <span class="thanks-icon"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg></span>
+        <h3>Thank You!</h3>
+        <p>You have been subscribed. God bless you!</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-loader" aria-hidden="true">
+    <div class="loader-cross-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true">
+        <rect x="9" y="0" width="4" height="30" rx="0.5"/>
+        <rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/>
+        <rect x="0" y="11" width="22" height="3.5" rx="0.5"/>
+        <polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/>
+      </svg>
+    </div>
+    <p class="loader-title">Sts. Cyril and Methody</p>
+    <p class="loader-subtitle">Macedono-Bulgarian Eastern Orthodox Cathedral</p>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+
+  <script src="js/accordion.js" defer></script>
+  <script src="js/language-toggle.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/enhancements.js" defer></script>
+  <script>
+    // Donation form submit
+    document.addEventListener('DOMContentLoaded', function () {
+      var form    = document.getElementById('donation-contact-form');
+      var success = document.getElementById('donation-success');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var email = form.querySelector('#donor-email').value;
+          var name  = form.querySelector('#donor-name').value;
+          if (!email || !name) return;
+          form.style.display = 'none';
+          if (success) success.style.display = 'block';
+        });
+      }
+
+      // Amount button selection
+      document.querySelectorAll('.amount-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.amount-btn').forEach(function (b) { b.classList.remove('selected'); });
+          btn.classList.add('selected');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
