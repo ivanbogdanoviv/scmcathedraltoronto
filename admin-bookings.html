@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Booking Admin — Sts. Cyril and Methody Cathedral</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/halls.css">
+  <style>
+    body { background: #f5f2ed; }
+    .admin-header {
+      background: #2C1810;
+      color: #C9A646;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Orthodox', serif;
+      font-size: 1.05rem;
+    }
+    .admin-header svg { width:22px; height:30px; fill:#C9A646; }
+    .admin-header a { color:rgba(201,166,70,0.7); text-decoration:none; font-size:0.82rem; margin-left:auto; font-family:'Open Sans',sans-serif; }
+    .admin-header a:hover { color:#C9A646; }
+    .admin-server-offline {
+      text-align:center; padding:60px 20px;
+      font-family:'PT Serif',serif; color:#888;
+      background:#FAF7F2; border-radius:12px;
+      border:1.5px dashed rgba(201,166,70,0.4);
+      margin:40px;
+    }
+    .admin-server-offline strong { display:block; font-size:1.1rem; color:#2C1810; margin-bottom:8px; }
+    .empty-state {
+      text-align:center; padding:40px 20px;
+      color:#aaa; font-family:'PT Serif',serif;
+      font-style:italic;
+    }
+    .detail-overlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+      z-index:9000; overflow-y:auto; padding:40px 20px;
+    }
+    .detail-overlay.open { display:flex; align-items:flex-start; justify-content:center; }
+    .detail-box {
+      background:#FAF7F2; border-radius:14px; padding:32px;
+      max-width:600px; width:100%; position:relative;
+    }
+    .detail-close {
+      position:absolute; top:14px; right:14px;
+      background:none; border:none; font-size:1.4rem; color:#888; cursor:pointer;
+    }
+    .detail-close:hover { color:#D62612; }
+    .detail-title { font-family:'Orthodox',serif; font-size:1.15rem; color:#2C1810; margin-bottom:18px; }
+    .detail-grid {
+      display:grid; grid-template-columns:140px 1fr; gap:4px 12px;
+      font-size:0.875rem; margin-bottom:16px;
+    }
+    .detail-grid strong { color:#2C1810; font-family:'Open Sans',sans-serif; }
+    .detail-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; border-top:1px solid rgba(201,166,70,0.3); padding-top:16px; }
+    .notes-area { width:100%; padding:8px 12px; border:1.5px solid rgba(44,24,16,0.18); border-radius:6px; font-family:'Open Sans',sans-serif; font-size:0.85rem; color:#2C1810; resize:vertical; min-height:70px; margin-top:6px; box-sizing:border-box; }
+  </style>
+</head>
+<body>
+
+  <div class="admin-header">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true">
+      <rect x="9" y="0" width="4" height="30" rx="0.5"/>
+      <rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/>
+      <rect x="0" y="11" width="22" height="3.5" rx="0.5"/>
+      <polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/>
+    </svg>
+    Hall Booking Admin
+    <span style="font-size:0.7rem;opacity:0.6;font-family:'Open Sans',sans-serif;margin-left:8px">localhost only</span>
+    <a href="halls.html">← Back to Halls page</a>
+  </div>
+
+  <div id="server-offline" class="admin-server-offline" style="display:none">
+    <strong>Booking Server Offline</strong>
+    Start the server to use this admin panel:<br><br>
+    <code style="background:rgba(0,0,0,0.06);padding:4px 10px;border-radius:4px">node server.js</code>
+  </div>
+
+  <div id="admin-main" style="display:none">
+    <div class="admin-wrap">
+
+      <div class="admin-tabs" role="tablist">
+        <button class="admin-tab active" role="tab" data-panel="panel-inquiries">Inquiries</button>
+        <button class="admin-tab" role="tab" data-panel="panel-availability">Manage Availability</button>
+      </div>
+
+      <!-- ─── Tab 1: Inquiries ──────────────────────────────── -->
+      <div class="admin-panel active" id="panel-inquiries" role="tabpanel">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <div>
+            <span id="inq-count" style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:#888"></span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <label style="font-size:0.82rem;font-family:'Open Sans',sans-serif;color:#666">Filter:
+              <select id="inq-filter" style="margin-left:6px;padding:5px 10px;border:1.5px solid rgba(44,24,16,0.2);border-radius:6px;font-family:'Open Sans',sans-serif;font-size:0.82rem">
+                <option value="">All</option>
+                <option value="new">New</option>
+                <option value="agreement_sent">Agreement Sent</option>
+                <option value="signed">Signed</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="declined">Declined</option>
+              </select>
+            </label>
+            <button onclick="loadInquiries()" style="padding:6px 14px;background:#2C1810;color:#C9A646;border:none;border-radius:6px;cursor:pointer;font-size:0.82rem;font-family:'Open Sans',sans-serif">Refresh</button>
+          </div>
+        </div>
+
+        <div id="inquiry-list">
+          <div class="empty-state">Loading inquiries…</div>
+        </div>
+      </div>
+
+      <!-- ─── Tab 2: Manage Availability ───────────────────── -->
+      <div class="admin-panel" id="panel-availability" role="tabpanel">
+
+        <p style="font-family:'PT Serif',serif;color:#666;margin-bottom:24px;font-size:0.92rem">
+          Manage which dates show as booked, pending, or held on the public availability calendar.
+          Dates are marked automatically when inquiries arrive (pending) or are confirmed (booked).
+          Use these controls to manually adjust dates.
+        </p>
+
+        <div class="avail-manage-grid">
+          <div class="avail-list-box" id="box-booked">
+            <h4 style="color:#D62612">Booked Dates</h4>
+            <div id="list-booked"></div>
+            <div class="avail-add-row">
+              <input type="date" id="add-booked-date">
+              <button onclick="addAvailDate('bookedDates','add-booked-date')">+ Add</button>
+            </div>
+          </div>
+          <div class="avail-list-box" id="box-pending">
+            <h4 style="color:#8a6a00">Pending Dates</h4>
+            <div id="list-pending"></div>
+            <div class="avail-add-row">
+              <input type="date" id="add-pending-date">
+              <button onclick="addAvailDate('pendingDates','add-pending-date')">+ Add</button>
+            </div>
+          </div>
+          <div class="avail-list-box" id="box-held">
+            <h4 style="color:#555">Held / Reserved</h4>
+            <div id="list-held"></div>
+            <div class="avail-add-row">
+              <input type="date" id="add-held-date">
+              <button onclick="addAvailDate('heldDates','add-held-date')">+ Add</button>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="saveAvailability()" style="padding:12px 28px;background:#2C1810;color:#C9A646;border:2px solid #C9A646;border-radius:8px;font-family:'Orthodox',serif;font-size:0.9rem;cursor:pointer;margin-top:8px">
+          Save Availability
+        </button>
+        <span id="avail-saved-msg" style="display:none;margin-left:16px;color:green;font-family:'Open Sans',sans-serif;font-size:0.85rem">Saved!</span>
+      </div>
+
+    </div><!-- /.admin-wrap -->
+  </div><!-- /#admin-main -->
+
+  <!-- Detail overlay -->
+  <div class="detail-overlay" id="detail-overlay" role="dialog" aria-modal="true" aria-label="Inquiry details">
+    <div class="detail-box">
+      <button class="detail-close" onclick="closeDetail()" aria-label="Close">&times;</button>
+      <div class="detail-title" id="detail-title">Inquiry Details</div>
+      <div id="detail-body"></div>
+    </div>
+  </div>
+
+  <script>
+  'use strict';
+
+  var availData = { bookedDates: [], pendingDates: [], heldDates: [] };
+  var inquiries = [];
+
+  var EVENT_LABELS = {
+    wedding:'Wedding', reception:'Reception / Party',
+    concert:'Concert / Cultural Show', conference:'Conference / Meeting',
+    community:'Community Event', memorial:'Memorial Service', other:'Other Event'
+  };
+  var STATUS_LABELS = {
+    new:'New', agreement_sent:'Agreement Sent', signed:'Signed',
+    confirmed:'Confirmed', declined:'Declined'
+  };
+
+  // ── Boot ─────────────────────────────────────────────────────
+  (async function boot() {
+    try {
+      var r = await fetch('/api/ping', { signal: AbortSignal.timeout(2000) });
+      if (!r.ok) throw new Error();
+    } catch (e) {
+      document.getElementById('server-offline').style.display = 'block';
+      return;
+    }
+    document.getElementById('admin-main').style.display = 'block';
+    loadInquiries();
+    loadAvailabilityData();
+  })();
+
+  // ── Tabs ──────────────────────────────────────────────────────
+  document.querySelectorAll('.admin-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.admin-tab').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('.admin-panel').forEach(function (p) { p.classList.remove('active'); });
+      this.classList.add('active');
+      document.getElementById(this.dataset.panel).classList.add('active');
+    });
+  });
+
+  // ── Load inquiries ────────────────────────────────────────────
+  async function loadInquiries() {
+    var r = await fetch('/api/inquiries');
+    inquiries = await r.json();
+    renderInquiries();
+  }
+  window.loadInquiries = loadInquiries;
+
+  function renderInquiries() {
+    var filter  = document.getElementById('inq-filter').value;
+    var list    = document.getElementById('inquiry-list');
+    var filtered = filter ? inquiries.filter(function (b) { return b.status === filter; }) : inquiries;
+
+    // Sort newest first
+    filtered = filtered.slice().sort(function (a, b) { return b.submittedAt > a.submittedAt ? 1 : -1; });
+
+    var countEl = document.getElementById('inq-count');
+    if (countEl) countEl.textContent = filtered.length + ' of ' + inquiries.length + ' inquiries';
+
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="empty-state">No inquiries' + (filter ? ' with status "' + STATUS_LABELS[filter] + '"' : '') + '.</div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(function (b) {
+      var evLabel = EVENT_LABELS[b.eventType] || b.eventType;
+      var q = b.quote || {};
+      return '<div class="inquiry-card" data-id="' + b.id + '">' +
+        '<div>' +
+          '<div class="inquiry-card-meta">' + new Date(b.submittedAt).toLocaleDateString('en-CA') + '</div>' +
+          '<div class="inquiry-card-name">' + esc(b.name) + '</div>' +
+          '<div class="inquiry-card-detail">' +
+            evLabel + ' · ' + b.preferredDate +
+            (b.guestCount ? ' · ' + b.guestCount + ' guests' : '') +
+            (q.total ? ' · <strong>$' + q.total.toLocaleString() + '</strong>' : '') +
+          '</div>' +
+          '<div class="inquiry-card-meta" style="margin-top:4px">' + esc(b.email) + '</div>' +
+        '</div>' +
+        '<div class="inquiry-card-actions">' +
+          '<span class="status-badge status-' + b.status + '">' + (STATUS_LABELS[b.status] || b.status) + '</span>' +
+          '<button class="admin-btn admin-btn-outline" onclick="openDetail(\'' + b.id + '\')">View Details</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('inq-filter').addEventListener('change', renderInquiries);
+
+  // ── Detail overlay ────────────────────────────────────────────
+  function openDetail(id) {
+    var b = inquiries.find(function (x) { return x.id === id; });
+    if (!b) return;
+
+    var q = b.quote || {};
+    var addons = (b.addons || []).map(function (a) {
+      return ({ av:'AV System', bar:'Bar Service', piano:'Yamaha Piano', kitchen:'Kitchen' }[a] || a);
+    }).join(', ') || 'None';
+
+    var actionsBtns = '';
+    if (b.status === 'new') {
+      actionsBtns +=
+        '<button class="admin-btn admin-btn-gold" onclick="sendAgreement(\'' + b.id + '\')">Send Agreement</button>' +
+        '<button class="admin-btn admin-btn-red"  onclick="updateStatus(\'' + b.id + '\',\'declined\')">Decline</button>';
+    }
+    if (b.status === 'agreement_sent') {
+      actionsBtns += '<button class="admin-btn admin-btn-gold" onclick="sendAgreement(\'' + b.id + '\')">Resend Agreement</button>';
+    }
+    if (b.status === 'signed') {
+      actionsBtns += '<button class="admin-btn admin-btn-gold" onclick="updateStatus(\'' + b.id + '\',\'confirmed\')">Confirm Booking</button>';
+    }
+    if (b.status !== 'declined') {
+      actionsBtns += '<button class="admin-btn admin-btn-outline" onclick="openAgreement(\'' + b.id + '\')">View Agreement Page</button>';
+    }
+
+    var pdfLink = b.signedAt ? '<a href="/data/agreement_' + b.id + '.pdf" target="_blank" class="admin-btn admin-btn-outline" style="text-decoration:none">Download PDF</a>' : '';
+
+    document.getElementById('detail-title').textContent = b.name + ' — ' + (EVENT_LABELS[b.eventType] || b.eventType);
+    document.getElementById('detail-body').innerHTML =
+      '<div class="detail-grid">' +
+        '<strong>Status</strong><span><span class="status-badge status-' + b.status + '">' + (STATUS_LABELS[b.status] || b.status) + '</span></span>' +
+        '<strong>Submitted</strong><span>' + new Date(b.submittedAt).toLocaleString('en-CA') + '</span>' +
+        '<strong>Email</strong><span><a href="mailto:' + esc(b.email) + '">' + esc(b.email) + '</a></span>' +
+        '<strong>Phone</strong><span>' + esc(b.phone || '—') + '</span>' +
+        '<strong>Event Date</strong><span>' + b.preferredDate + (b.altDate ? ' (alt: ' + b.altDate + ')' : '') + '</span>' +
+        '<strong>Time</strong><span>' + (b.startTime || '?') + ' – ' + (b.endTime || '?') + '</span>' +
+        '<strong>Duration</strong><span>' + (b.duration === 'half' ? 'Half Day' : 'Full Day') + '</span>' +
+        '<strong>Guests</strong><span>' + (b.guestCount || '—') + '</span>' +
+        '<strong>Add-ons</strong><span>' + esc(addons) + '</span>' +
+        (b.specialRequests ? '<strong>Requests</strong><span>' + esc(b.specialRequests) + '</span>' : '') +
+        '<strong>Quote</strong><span>' +
+          'Rental: $' + (q.base||0).toLocaleString() +
+          (q.addons > 0 ? ' + Add-ons: $' + q.addons.toLocaleString() : '') +
+          ' + Deposit: $' + (q.deposit||500).toLocaleString() +
+          ' = <strong>$' + (q.total||0).toLocaleString() + '</strong>' +
+        '</span>' +
+        (b.signedAt ? '<strong>Signed</strong><span>' + new Date(b.signedAt).toLocaleString('en-CA') + '</span>' : '') +
+        (b.confirmedAt ? '<strong>Confirmed</strong><span>' + new Date(b.confirmedAt).toLocaleString('en-CA') + '</span>' : '') +
+      '</div>' +
+      '<div style="margin-top:12px">' +
+        '<label style="font-size:0.8rem;font-weight:600;font-family:Open Sans,sans-serif;color:#2C1810;text-transform:uppercase;letter-spacing:0.04em">Internal Notes</label>' +
+        '<textarea class="notes-area" id="detail-notes">' + esc(b.notes || '') + '</textarea>' +
+        '<button class="admin-btn admin-btn-outline" style="margin-top:6px" onclick="saveNotes(\'' + b.id + '\')">Save Notes</button>' +
+      '</div>' +
+      '<div class="detail-actions">' + actionsBtns + pdfLink + '</div>';
+
+    document.getElementById('detail-overlay').classList.add('open');
+  }
+  window.openDetail = openDetail;
+
+  function closeDetail() {
+    document.getElementById('detail-overlay').classList.remove('open');
+  }
+  window.closeDetail = closeDetail;
+  document.getElementById('detail-overlay').addEventListener('click', function (e) {
+    if (e.target === this) closeDetail();
+  });
+
+  // ── Actions ───────────────────────────────────────────────────
+  async function sendAgreement(id) {
+    var btn = event.target;
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      var r = await fetch('/api/inquiry/' + id + '/send-agreement', { method: 'POST' });
+      if (!r.ok) throw new Error();
+      alert('Agreement link sent to client\'s email.');
+      closeDetail();
+      loadInquiries();
+    } catch (e) {
+      alert('Failed to send. Check server console.');
+      btn.disabled = false; btn.textContent = 'Send Agreement';
+    }
+  }
+  window.sendAgreement = sendAgreement;
+
+  async function updateStatus(id, status) {
+    if (status === 'declined' && !confirm('Decline this inquiry?')) return;
+    if (status === 'confirmed' && !confirm('Confirm this booking? This will mark the date as booked.')) return;
+    var r = await fetch('/api/inquiry/' + id + '/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: status }),
+    });
+    if (r.ok) { closeDetail(); loadInquiries(); loadAvailabilityData(); }
+    else alert('Failed to update status.');
+  }
+  window.updateStatus = updateStatus;
+
+  async function saveNotes(id) {
+    var notes = document.getElementById('detail-notes').value;
+    var r = await fetch('/api/inquiry/' + id + '/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: inquiries.find(function(x){return x.id===id;}).status, notes: notes }),
+    });
+    if (r.ok) { alert('Notes saved.'); loadInquiries(); }
+  }
+  window.saveNotes = saveNotes;
+
+  function openAgreement(id) {
+    window.open('/agreement.html?id=' + id, '_blank');
+  }
+  window.openAgreement = openAgreement;
+
+  // ── Availability management ───────────────────────────────────
+  async function loadAvailabilityData() {
+    var r = await fetch('/api/availability');
+    availData = await r.json();
+    renderAvailLists();
+  }
+  window.loadAvailabilityData = loadAvailabilityData;
+
+  function renderAvailLists() {
+    renderAvailList('list-booked',  'bookedDates');
+    renderAvailList('list-pending', 'pendingDates');
+    renderAvailList('list-held',    'heldDates');
+  }
+
+  function renderAvailList(containerId, key) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var dates = (availData[key] || []).slice().sort();
+    if (dates.length === 0) {
+      el.innerHTML = '<div style="font-size:0.8rem;color:#aaa;font-style:italic;padding:4px 0">No dates set</div>';
+      return;
+    }
+    el.innerHTML = dates.map(function (d) {
+      return '<div class="avail-date-item">' +
+        '<span>' + d + '</span>' +
+        '<button onclick="removeAvailDate(\'' + key + '\',\'' + d + '\')" title="Remove">&times;</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function addAvailDate(key, inputId) {
+    var val = document.getElementById(inputId).value;
+    if (!val) return;
+    if (!availData[key]) availData[key] = [];
+    if (availData[key].indexOf(val) === -1) availData[key].push(val);
+    document.getElementById(inputId).value = '';
+    renderAvailLists();
+  }
+  window.addAvailDate = addAvailDate;
+
+  function removeAvailDate(key, date) {
+    availData[key] = (availData[key] || []).filter(function (d) { return d !== date; });
+    renderAvailLists();
+  }
+  window.removeAvailDate = removeAvailDate;
+
+  async function saveAvailability() {
+    var r = await fetch('/api/availability', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(availData),
+    });
+    if (r.ok) {
+      var msg = document.getElementById('avail-saved-msg');
+      msg.style.display = 'inline';
+      setTimeout(function () { msg.style.display = 'none'; }, 2500);
+    } else {
+      alert('Failed to save.');
+    }
+  }
+  window.saveAvailability = saveAvailability;
+
+  // ── Utility ───────────────────────────────────────────────────
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  </script>
+
+</body>
+</html>

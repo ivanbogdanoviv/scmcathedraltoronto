@@ -583,14 +583,25 @@
         var title = events.length ? events.map(function (ev) { return ev.title; }).join(' | ') : '';
 
         html += '<div class="' + classes + '"' +
-          (title ? ' title="' + title.replace(/"/g, '&quot;') + '" tabindex="0"' : '') +
-          ' data-date="' + dateStr + '">' + d + '</div>';
+          (title ? ' title="' + title.replace(/"/g, '&quot;') + '"' : '') +
+          ' tabindex="0" data-date="' + dateStr + '">' + d + '</div>';
       }
 
       grid.innerHTML = html;
 
-      grid.querySelectorAll('.has-event, .has-feast').forEach(function (el) {
+      grid.querySelectorAll('.mini-cal-date:not(.empty)').forEach(function (el) {
+        el.style.cursor = 'pointer';
         el.addEventListener('click', function () {
+          var dateStr = el.getAttribute('data-date');
+          if (!dateStr) return;
+          // Jump slider to this date
+          if (typeof window.jumpToEventDate === 'function') {
+            window.jumpToEventDate(dateStr);
+            // Highlight selected date
+            grid.querySelectorAll('.mini-cal-date').forEach(function (c) { c.classList.remove('selected'); });
+            el.classList.add('selected');
+          }
+          // Scroll slider into view
           var list = document.getElementById('upcoming-events-list') || document.getElementById('events-calendar');
           if (list) list.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
@@ -599,9 +610,9 @@
         });
       });
 
-      // Update events list when month changes (skip if showing all)
+      // Update events list when month changes (skip if showing all, or slider mode)
       var list = document.getElementById('upcoming-events-list');
-      if (list && list.getAttribute('data-show-all') !== 'true') {
+      if (list && list.getAttribute('data-show-all') !== 'true' && list.getAttribute('data-mode') !== 'slider') {
         renderEventsList(year, month);
       }
     }
@@ -748,12 +759,136 @@
   }
 
   // ============================================================
+  // UPCOMING EVENTS SLIDER (Home Page — Parts 1, 2 & 6)
+  // ============================================================
+  function initUpcomingEventsSlider() {
+    var sliderList = document.getElementById('upcoming-events-list');
+    var prevBtn    = document.getElementById('event-prev');
+    var nextBtn    = document.getElementById('event-next');
+
+    // Only activate on home-page slider (data-mode="slider")
+    if (!sliderList || sliderList.getAttribute('data-mode') !== 'slider') return;
+
+    var monthNames = [
+      'January','February','March','April','May','June',
+      'July','August','September','October','November','December'
+    ];
+    var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+    // Parse "YYYY-MM-DD" safely in LOCAL timezone (avoids UTC midnight shift)
+    function parseLocalDate(str) {
+      var p = str.split('-');
+      var d = new Date(+p[0], +p[1] - 1, +p[2]);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    }
+
+    // Today normalized to midnight
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var todayTime = today.getTime();
+
+    // All events sorted chronologically
+    var allEvents = churchEvents.slice().sort(function (a, b) {
+      return parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime();
+    });
+
+    // Start at today's event or next upcoming
+    var startIdx = 0;
+    for (var i = 0; i < allEvents.length; i++) {
+      if (parseLocalDate(allEvents[i].date).getTime() >= todayTime) { startIdx = i; break; }
+    }
+    var currentIdx = startIdx;
+
+    // ---- Render one event ----
+    function renderEvent(idx) {
+      var total = allEvents.length;
+      if (!total) {
+        sliderList.style.opacity = '1';
+        sliderList.innerHTML = '<p style="padding:20px 0;color:#888;font-family:\'PT Serif\',serif">No events found.</p>';
+        return;
+      }
+
+      // Infinite loop
+      if (idx < 0)      idx = total - 1;
+      if (idx >= total) idx = 0;
+      currentIdx = idx;
+
+      var ev      = allEvents[currentIdx];
+      var evDate  = parseLocalDate(ev.date);
+      var isPast  = evDate.getTime() < todayTime;
+      var isToday = evDate.getTime() === todayTime;
+
+      // Human-readable full date
+      var readableDate = dayNames[evDate.getDay()] + ', ' +
+        monthNames[evDate.getMonth()] + ' ' + evDate.getDate() + ', ' + evDate.getFullYear();
+
+      // Badge & item classes
+      var badgeClass = ev.type === 'feast'
+        ? 'badge-red'
+        : (ev.type === 'community' ? 'badge-gold' : '');
+      var itemClass = 'event-item' +
+        (ev.type === 'feast'     ? ' feast-day'       : '') +
+        (ev.type === 'community' ? ' community-event'  : '') +
+        (isToday                 ? ' event-today'      : '') +
+        (isPast                  ? ' event-past'       : '');
+
+      // Render with fade
+      sliderList.style.opacity = '0';
+      setTimeout(function () {
+        sliderList.innerHTML =
+          '<div class="' + itemClass + '">' +
+            '<div class="event-date-badge ' + badgeClass + '">' +
+              '<span class="event-date-day">' + evDate.getDate() + '</span>' +
+              '<span class="event-date-month">' + monthNames[evDate.getMonth()].slice(0, 3).toUpperCase() + '</span>' +
+            '</div>' +
+            '<div class="event-info">' +
+              '<div class="event-date-full">' + readableDate + '</div>' +
+              '<div class="event-title">' + ev.title + '</div>' +
+            '</div>' +
+          '</div>';
+        sliderList.style.opacity = '1';
+      }, 160);
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { renderEvent(currentIdx - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { renderEvent(currentIdx + 1); });
+
+    // Keyboard support
+    document.addEventListener('keydown', function (e) {
+      if (!document.getElementById('event-slider-area')) return;
+      if (e.key === 'ArrowLeft')  renderEvent(currentIdx - 1);
+      if (e.key === 'ArrowRight') renderEvent(currentIdx + 1);
+    });
+
+    // ---- Calendar date click → jump slider ----
+    // Exposed globally so renderCalendar() can call it
+    window.jumpToEventDate = function (dateStr) {
+      // Find exact match first
+      for (var j = 0; j < allEvents.length; j++) {
+        if (allEvents[j].date === dateStr) { renderEvent(j); return; }
+      }
+      // No exact match — find nearest upcoming event from that date
+      var clickedTime = parseLocalDate(dateStr).getTime();
+      var nearest = -1;
+      for (var k = 0; k < allEvents.length; k++) {
+        if (parseLocalDate(allEvents[k].date).getTime() >= clickedTime) { nearest = k; break; }
+      }
+      if (nearest === -1) nearest = allEvents.length - 1; // past the last event
+      renderEvent(nearest);
+    };
+
+    renderEvent(startIdx);
+  }
+
+  // ============================================================
   // INIT
   // ============================================================
   document.addEventListener('DOMContentLoaded', function () {
     initFABs();
     initNewsletterModal();
     initMiniCalendar();
+    initUpcomingEventsSlider();
     initMobileDropdowns();
     initHeroDots();
     initScrollAnimations();

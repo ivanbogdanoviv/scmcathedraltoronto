@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Rental Agreement — Sts. Cyril and Methody Cathedral</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/halls.css">
+  <!-- Signature Pad library -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+</head>
+<body>
+<div class="orth-border-top" aria-hidden="true"></div>
+
+  <!-- Minimal header (no full nav — this is a client-facing signing page) -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="header-icon-wrapper">
+        <img src="assets/images/icons/logoPNG.png" alt="Sts. Cyril and Methody Cathedral Logo" class="header-logo">
+      </div>
+      <div class="header-center" style="text-align:center;">
+        <span class="cathedral-name">Sts. Cyril and Methody</span>
+        <p class="cathedral-subtitle">Macedono-Bulgarian Eastern Orthodox Cathedral</p>
+        <p class="header-est">
+          <span class="cross-divider" aria-hidden="true"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg></span>
+          HALL RENTAL AGREEMENT
+          <span class="cross-divider" aria-hidden="true"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg></span>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="agreement-wrap">
+
+      <!-- Loading state -->
+      <div id="agr-loading" style="text-align:center;padding:60px 20px;font-family:'PT Serif',serif;color:#888">
+        <div style="font-size:2rem;margin-bottom:12px">⏳</div>
+        Loading your agreement…
+      </div>
+
+      <!-- Error state -->
+      <div id="agr-error" style="display:none;text-align:center;padding:60px 20px;font-family:'PT Serif',serif;color:#a01000;background:rgba(214,38,18,0.06);border-radius:12px;border:1.5px solid rgba(214,38,18,0.2)">
+        <div style="font-size:2.5rem;margin-bottom:12px">⚠</div>
+        <strong style="font-size:1.1rem">Agreement Not Found</strong>
+        <p style="margin-top:8px;color:#666">This link may have expired or the booking server may be offline.<br>
+        Please contact us at <a href="tel:4163682828" style="color:#2C1810">416-368-2828</a>.</p>
+      </div>
+
+      <!-- Already signed state -->
+      <div id="agr-already-signed" class="agreement-success" style="display:none">
+        <div class="agreement-success-icon">✅</div>
+        <h2>Agreement Already Signed</h2>
+        <p>This agreement has already been signed. A PDF copy was emailed to you at the time of signing.</p>
+        <p style="margin-top:12px;font-size:0.85rem;color:#888">If you need another copy, please contact us at <a href="mailto:scmcathedraltoronto@hotmail.com" style="color:#2C1810">scmcathedraltoronto@hotmail.com</a></p>
+      </div>
+
+      <!-- Agreement document (populated by JS) -->
+      <div id="agr-content" style="display:none">
+
+        <div class="agreement-doc" id="agr-doc">
+          <h1>Hall Rental Agreement</h1>
+          <p class="agr-subtitle">Sts. Cyril and Methody Macedono-Bulgarian Eastern Orthodox Cathedral<br>237 Sackville Street, Toronto, ON M5A 3G1 &nbsp;|&nbsp; 416-368-2828</p>
+          <p class="agr-subtitle" id="agr-ref" style="font-size:0.78rem;color:#aaa"></p>
+
+          <hr class="agr-hr">
+
+          <p class="agr-section-title">Client Information</p>
+          <div class="agr-detail-grid" id="agr-client-details">
+            <!-- populated by JS -->
+          </div>
+
+          <hr class="agr-hr">
+
+          <p class="agr-section-title">Event Details</p>
+          <div class="agr-detail-grid" id="agr-event-details">
+            <!-- populated by JS -->
+          </div>
+
+          <hr class="agr-hr">
+
+          <p class="agr-section-title">Rental Fee</p>
+          <div class="agr-detail-grid" id="agr-fee-details">
+            <!-- populated by JS -->
+          </div>
+
+          <hr class="agr-hr">
+
+          <p class="agr-section-title">Terms &amp; Conditions</p>
+          <ol class="agr-terms-list">
+            <li>The Client agrees to use the hall solely for the event type stated above.</li>
+            <li>The security deposit ($500) is fully refundable within 7 days after the event, provided no damage occurred to the premises, fixtures, or equipment.</li>
+            <li>Full payment of the rental fee (less the deposit already paid) is due no later than <strong>14 days</strong> before the event date.</li>
+            <li>Cancellations made <strong>30 or more days</strong> before the event date will receive a full refund less the security deposit.</li>
+            <li>Cancellations made <strong>within 30 days</strong> of the event will forfeit 50% of the rental fee. The security deposit is forfeited on cancellations within 7 days.</li>
+            <li>The hall must be fully vacated by the agreed end time. Overtime is billed at <strong>$200/hour</strong> and deducted from the security deposit first.</li>
+            <li>The Client is fully responsible for all guests, vendors, and catering staff on the premises throughout the event.</li>
+            <li>No open flames, fireworks, sparklers, or pyrotechnics are permitted inside the hall at any time.</li>
+            <li>Outside catering is permitted. Use of the Cathedral's licensed bar requires the bar service add-on selected at booking.</li>
+            <li>Maximum occupancy must not exceed <strong>500 persons</strong> (theatre seating) or <strong>400 persons</strong> (banquet seating) at any time.</li>
+            <li>Amplified music must cease by <strong>1:00 AM</strong>. All guests must vacate the premises by <strong>1:30 AM</strong>.</li>
+            <li>The Cathedral reserves the right to cancel a booking due to unforeseeable religious observances or emergencies. In such cases, a full refund including the deposit will be issued within 7 business days.</li>
+            <li>This agreement constitutes the entire agreement between the parties and supersedes all prior discussions. Any amendments must be agreed to in writing.</li>
+          </ol>
+
+          <hr class="agr-hr">
+
+          <p style="font-size:0.85rem;color:#666;font-family:'Open Sans',sans-serif;font-style:italic;text-align:center">
+            By signing below, the Client acknowledges that they have read, understood, and agree to all terms and conditions stated in this agreement.
+          </p>
+        </div><!-- /.agreement-doc -->
+
+        <!-- Signature Section -->
+        <div class="sig-section">
+          <h3>Client Signature</h3>
+          <p>Please sign in the box below using your mouse, touchpad, or finger (on mobile).</p>
+
+          <div class="sig-canvas-wrap">
+            <canvas id="sig-canvas" aria-label="Signature pad — draw your signature here"></canvas>
+            <div class="sig-canvas-placeholder" id="sig-placeholder">Draw your signature here…</div>
+          </div>
+
+          <div class="sig-actions">
+            <button type="button" class="btn-clear-sig" id="btn-clear-sig">Clear</button>
+            <div style="flex:1;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div style="flex:1;min-width:180px">
+                <label style="font-size:0.8rem;font-family:'Open Sans',sans-serif;font-weight:600;color:#2C1810;text-transform:uppercase;letter-spacing:0.04em;display:block;margin-bottom:4px">
+                  Print Name <span style="color:#D62612">*</span>
+                </label>
+                <input type="text" id="sig-name" placeholder="Full name as it appears above"
+                  style="width:100%;padding:9px 13px;border:1.5px solid rgba(44,24,16,0.18);border-radius:7px;font-family:'Open Sans',sans-serif;font-size:0.9rem;color:#2C1810;box-sizing:border-box">
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px">
+            <button type="button" class="btn-sign-submit" id="btn-sign-submit">
+              Sign &amp; Submit Agreement
+            </button>
+          </div>
+
+          <div id="sig-error" style="display:none;margin-top:10px;color:#a01000;font-size:0.85rem;font-family:'Open Sans',sans-serif;background:rgba(214,38,18,0.07);padding:10px 14px;border-radius:6px"></div>
+        </div>
+
+        <!-- Success state (shown after signing) -->
+        <div class="agreement-success" id="agr-success">
+          <div class="agreement-success-icon">✅</div>
+          <h2>Agreement Signed!</h2>
+          <p>Your signed rental agreement has been submitted. A PDF copy will be emailed to you shortly.</p>
+          <p style="margin-top:14px;font-size:0.9rem;color:#666">
+            Please keep this confirmation for your records. If you have any questions, contact us at<br>
+            <a href="tel:4163682828" style="color:#2C1810;font-weight:700">416-368-2828</a> or
+            <a href="mailto:scmcathedraltoronto@hotmail.com" style="color:#2C1810">scmcathedraltoronto@hotmail.com</a>
+          </p>
+          <a id="agr-pdf-link" href="#" style="display:none;margin-top:18px;display:inline-block;padding:12px 24px;background:#2C1810;color:#C9A646;font-family:'Orthodox',serif;text-decoration:none;border-radius:8px;border:2px solid #C9A646">
+            Download Signed Agreement (PDF)
+          </a>
+        </div>
+
+      </div><!-- /#agr-content -->
+
+    </div><!-- /.agreement-wrap -->
+  </main>
+
+<div class="orth-border-section" aria-hidden="true"></div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-section">
+        <span class="footer-cross" aria-hidden="true"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg></span>
+        <h3>Sts. Cyril &amp; Methody</h3>
+        <p>Macedono-Bulgarian Eastern Orthodox Cathedral<br>Toronto, Canada</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>237 Sackville Street<br>Toronto, ON M5A 3G1</p>
+        <p>☎ <a href="tel:4163682828">416-368-2828</a></p>
+        <p>✉ <a href="mailto:scmcathedraltoronto@hotmail.com">scmcathedraltoronto@hotmail.com</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Hall Rental</h3>
+        <p>7,000 sq ft · 400–500 capacity<br>Stage · Yamaha Piano<br>Full Kitchen · Bar</p>
+        <a href="halls.html" style="color:#C9A646;text-decoration:none">← Back to Hall Info</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sts. Cyril and Methody Macedono-Bulgarian Eastern Orthodox Cathedral, Toronto.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var bookingId = new URLSearchParams(window.location.search).get('id');
+    var booking   = null;
+    var sigPad    = null;
+
+    var elLoading      = document.getElementById('agr-loading');
+    var elError        = document.getElementById('agr-error');
+    var elAlreadySigned= document.getElementById('agr-already-signed');
+    var elContent      = document.getElementById('agr-content');
+    var elSuccess      = document.getElementById('agr-success');
+
+    // ── Load booking data ────────────────────────────────────────
+    async function loadBooking() {
+      if (!bookingId) { showError(); return; }
+      try {
+        var r = await fetch('/api/inquiry/' + bookingId, { signal: AbortSignal.timeout(4000) });
+        if (!r.ok) { showError(); return; }
+        booking = await r.json();
+        if (booking.status === 'signed' || booking.status === 'confirmed') {
+          elLoading.style.display = 'none';
+          elAlreadySigned.style.display = 'block';
+          elAlreadySigned.classList.add('visible');
+          return;
+        }
+        populateAgreement(booking);
+        elLoading.style.display = 'none';
+        elContent.style.display = 'block';
+        initSignaturePad();
+      } catch (e) {
+        showError();
+      }
+    }
+
+    function showError() {
+      elLoading.style.display = 'none';
+      elError.style.display   = 'block';
+    }
+
+    // ── Populate agreement document ──────────────────────────────
+    var EVENT_LABELS = {
+      wedding: 'Wedding', reception: 'Reception / Party',
+      concert: 'Concert / Cultural Show', conference: 'Conference / Meeting',
+      community: 'Community Event', memorial: 'Memorial Service', other: 'Other Event'
+    };
+    var ADDON_LABELS = { av: 'AV System (+$200)', bar: 'Bar Service (+$300)', piano: 'Yamaha Piano (+$150)', kitchen: 'Catering Kitchen (+$150)' };
+
+    function kv(label, value) {
+      return '<span class="agr-detail-label">' + label + '</span>' +
+             '<span class="agr-detail-value">' + (value || '—') + '</span>';
+    }
+
+    function populateAgreement(b) {
+      document.getElementById('agr-ref').textContent = 'Reference: ' + b.id;
+
+      document.getElementById('agr-client-details').innerHTML =
+        kv('Full Name', b.name) +
+        kv('Email', b.email) +
+        kv('Phone', b.phone || 'Not provided');
+
+      var addonsStr = (b.addons || []).map(function (a) { return ADDON_LABELS[a] || a; }).join(', ') || 'None';
+      document.getElementById('agr-event-details').innerHTML =
+        kv('Event Type',       EVENT_LABELS[b.eventType] || b.eventType) +
+        kv('Event Date',       b.preferredDate) +
+        kv('Start Time',       b.startTime || 'To be confirmed') +
+        kv('End Time',         b.endTime   || 'To be confirmed') +
+        kv('Duration',         b.duration === 'half' ? 'Half Day' : 'Full Day') +
+        kv('Expected Guests',  b.guestCount || '—') +
+        kv('Add-on Services',  addonsStr) +
+        (b.specialRequests ? kv('Special Requests', b.specialRequests) : '');
+
+      var q = b.quote || {};
+      var addonRow = (q.addons && q.addons > 0) ? kv('Add-on Services', '$' + q.addons.toLocaleString()) : '';
+      document.getElementById('agr-fee-details').innerHTML =
+        kv('Hall Rental', '$' + (q.base || 0).toLocaleString()) +
+        addonRow +
+        kv('Security Deposit (refundable)', '$' + (q.deposit || 500).toLocaleString()) +
+        '<span class="agr-detail-label" style="font-weight:700;margin-top:8px">Total Estimate</span>' +
+        '<span class="agr-detail-value" style="font-weight:700;font-size:1.05rem">$' + (q.total || 0).toLocaleString() + '</span>';
+
+      // Pre-fill signer name
+      var nameEl = document.getElementById('sig-name');
+      if (nameEl && b.name) nameEl.value = b.name;
+    }
+
+    // ── Signature Pad ────────────────────────────────────────────
+    function initSignaturePad() {
+      var canvas      = document.getElementById('sig-canvas');
+      var placeholder = document.getElementById('sig-placeholder');
+      if (!canvas) return;
+
+      // Resize canvas to actual pixel dimensions
+      function resizeCanvas() {
+        var ratio  = Math.max(window.devicePixelRatio || 1, 1);
+        var rect   = canvas.getBoundingClientRect();
+        canvas.width  = rect.width  * ratio;
+        canvas.height = rect.height * ratio;
+        canvas.getContext('2d').scale(ratio, ratio);
+        if (sigPad) sigPad.clear();
+      }
+
+      sigPad = new SignaturePad(canvas, {
+        backgroundColor: 'rgb(255,255,255)',
+        penColor: '#2C1810',
+        minWidth: 1,
+        maxWidth: 3,
+      });
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // Hide placeholder once user starts signing
+      canvas.addEventListener('mousedown',  function () { placeholder.style.display = 'none'; });
+      canvas.addEventListener('touchstart', function () { placeholder.style.display = 'none'; });
+
+      // Clear button
+      document.getElementById('btn-clear-sig').addEventListener('click', function () {
+        sigPad.clear();
+        placeholder.style.display = 'flex';
+      });
+
+      // Submit button
+      document.getElementById('btn-sign-submit').addEventListener('click', submitSignature);
+    }
+
+    // ── Submit signature ─────────────────────────────────────────
+    async function submitSignature() {
+      var errEl = document.getElementById('sig-error');
+      var btnEl = document.getElementById('btn-sign-submit');
+      var nameEl = document.getElementById('sig-name');
+
+      errEl.style.display = 'none';
+
+      if (!sigPad || sigPad.isEmpty()) {
+        errEl.textContent = 'Please draw your signature before submitting.';
+        errEl.style.display = 'block';
+        return;
+      }
+      if (!nameEl || !nameEl.value.trim()) {
+        errEl.textContent = 'Please print your full name.';
+        errEl.style.display = 'block';
+        nameEl.style.borderColor = '#D62612';
+        return;
+      }
+
+      btnEl.disabled   = true;
+      btnEl.textContent = 'Submitting…';
+
+      try {
+        var r = await fetch('/api/inquiry/' + bookingId + '/sign', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            signatureData: sigPad.toDataURL('image/png'),
+            signerName:    nameEl.value.trim(),
+          }),
+        });
+
+        if (!r.ok) throw new Error('Server returned ' + r.status);
+        var result = await r.json();
+
+        // Show success
+        elContent.querySelector('.sig-section').style.display = 'none';
+        elSuccess.classList.add('visible');
+        elSuccess.style.display = 'block';
+
+        if (result.pdfUrl) {
+          var pdfLink = document.getElementById('agr-pdf-link');
+          if (pdfLink) {
+            pdfLink.href = result.pdfUrl;
+            pdfLink.style.display = 'inline-block';
+          }
+        }
+
+        // Scroll to success
+        elSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      } catch (e) {
+        errEl.textContent = 'Submission failed: ' + (e.message || 'Please try again or call 416-368-2828.');
+        errEl.style.display = 'block';
+        btnEl.disabled   = false;
+        btnEl.textContent = 'Sign & Submit Agreement';
+      }
+    }
+
+    // ── Boot ─────────────────────────────────────────────────────
+    loadBooking();
+
+  })();
+  </script>
+
+  <!-- Page loader (reuse site's loading screen) -->
+  <div id="page-loader" aria-hidden="true">
+    <div class="loader-cross-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true">
+        <rect x="9" y="0" width="4" height="30" rx="0.5"/>
+        <rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/>
+        <rect x="0" y="11" width="22" height="3.5" rx="0.5"/>
+        <polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/>
+      </svg>
+    </div>
+    <p class="loader-title">Sts. Cyril and Methody</p>
+    <p class="loader-subtitle">Macedono-Bulgarian Eastern Orthodox Cathedral</p>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

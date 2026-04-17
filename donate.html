@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" href="assets/images/icons/logo.png">
   <style>
     .donate-hero {
-      background: linear-gradient(145deg, #8a1609 0%, #b51e0e 50%, #003893 100%);
+      background: linear-gradient(145deg, #8a1609 0%, #b51e0e 50%, #2C1810 100%);
       padding: 70px 20px;
       text-align: center;
       position: relative;
@@ -25,7 +25,7 @@
       content: '❤';
       position: absolute;
       font-size: 20rem;
-      opacity: 0.04;
+      opacity: 0.10;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
@@ -57,13 +57,13 @@
     }
     .amount-btn {
       padding: 18px 12px;
-      border: 2px solid rgba(0,56,147,0.2);
+      border: 2px solid rgba(44,24,16,0.2);
       border-radius: 8px;
       background: white;
       font-family: 'Orthodox', serif;
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--orthodox-blue);
+      color: var(--warm-brown);
       cursor: pointer;
       transition: all 0.22s;
       text-align: center;
@@ -71,9 +71,9 @@
     .amount-btn:hover, .amount-btn.selected {
       background: var(--orthodox-blue);
       color: white;
-      border-color: var(--orthodox-blue);
+      border-color: var(--warm-brown);
       transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(0,56,147,0.22);
+      box-shadow: 0 4px 14px rgba(44,24,16,0.22);
     }
     .amount-btn .amount-label {
       font-size: 0.65rem;
@@ -87,7 +87,7 @@
     .donate-form-card {
       background: white;
       border-radius: 16px;
-      box-shadow: 0 8px 40px rgba(0,56,147,0.12);
+      box-shadow: 0 8px 40px rgba(44,24,16,0.12);
       overflow: hidden;
       max-width: 560px;
     }
@@ -115,7 +115,7 @@
     .form-group input, .form-group select, .form-group textarea {
       width: 100%;
       padding: 12px 16px;
-      border: 2px solid rgba(0,56,147,0.14);
+      border: 2px solid rgba(44,24,16,0.14);
       border-radius: 6px;
       font-family: 'Open Sans', sans-serif;
       font-size: 0.9rem;
@@ -151,7 +151,7 @@
       border-radius: 12px;
       padding: 28px 20px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,56,147,0.08);
+      box-shadow: 0 4px 20px rgba(44,24,16,0.08);
       border-top: 4px solid var(--primary-gold);
     }
     .impact-amount {
@@ -176,15 +176,45 @@
       line-height: 1.65;
       margin-top: 20px;
     }
-    .tax-note strong { color: var(--orthodox-blue); }
+    .tax-note strong { color: var(--warm-brown); }
   </style>
 </head>
 <body>
-<div class="orth-border-top" aria-hidden="true"></div>
+
+  <!-- TOP INFO BAR -->
+  <div class="top-info-bar" role="complementary" aria-label="Contact information">
+    <div class="top-info-inner">
+      <div class="top-info-contacts">
+        <a href="tel:4163682828" class="top-info-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          416-368-2828
+        </a>
+        <a href="mailto:scmcathedraltoronto@hotmail.com" class="top-info-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span class="top-info-email">scmcathedraltoronto@hotmail.com</span>
+        </a>
+        <span class="top-info-item top-info-addr">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          237 Sackville St, Toronto, ON
+        </span>
+      </div>
+      <div class="top-info-socials">
+        <a href="#" class="top-social-link" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" class="top-social-link" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
+        <a href="#" class="top-social-link" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" class="top-social-link" aria-label="Twitter / X" title="Twitter / X"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" class="top-social-link" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+  </div>
+
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <header class="site-header" role="banner">
         <div class="header-inner">
+      <div class="header-icon-wrapper">
+        <img src="assets/images/icons/logoPNG.png" alt="Sts. Cyril and Methody Cathedral Logo" class="header-logo">
+      </div>
       <div class="header-center" style="text-align:center;">
         <span class="cathedral-name" data-lang-key="cathedral_name">Sts. Cyril and Methody</span>
         <p class="cathedral-subtitle" data-lang-key="cathedral_subtitle">Macedono-Bulgarian Eastern Orthodox Cathedral</p>
@@ -311,7 +341,7 @@
             </p>
 
             <!-- Impact Cards -->
-            <h3 style="font-family:'Orthodox',serif;color:var(--orthodox-blue);font-size:1.1rem;margin-bottom:20px;letter-spacing:0.06em;">Your Gift in Action</h3>
+            <h3 style="font-family:'Orthodox',serif;color:var(--warm-brown);font-size:1.1rem;margin-bottom:20px;letter-spacing:0.06em;">Your Gift in Action</h3>
             <div class="impact-cards">
               <div class="impact-card">
                 <div class="impact-amount">$25</div>
@@ -338,27 +368,27 @@
 
             <!-- Ways to Give (other than form) -->
             <div style="margin-top:40px;">
-              <h3 style="font-family:'Orthodox',serif;color:var(--orthodox-blue);font-size:1rem;margin-bottom:20px;letter-spacing:0.08em;">Other Ways to Give</h3>
+              <h3 style="font-family:'Orthodox',serif;color:var(--warm-brown);font-size:1rem;margin-bottom:20px;letter-spacing:0.08em;">Other Ways to Give</h3>
               <div style="display:flex;flex-direction:column;gap:14px;">
-                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(0,56,147,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
+                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(44,24,16,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
                   <span style="font-size:1.6rem;">📬</span>
                   <div>
                     <p style="font-family:'Orthodox',serif;font-size:0.875rem;font-weight:700;color:var(--dark-text);margin-bottom:4px;">Cheque by Mail</p>
                     <p style="font-size:0.83rem;color:#777;line-height:1.6;">Make payable to <strong>"Sts. Cyril and Methody Cathedral"</strong> and mail to: 237 Sackville Street, Toronto, ON M5A 3G1</p>
                   </div>
                 </div>
-                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(0,56,147,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
+                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(44,24,16,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
                   <span style="font-size:1.6rem;">✉</span>
                   <div>
                     <p style="font-family:'Orthodox',serif;font-size:0.875rem;font-weight:700;color:var(--dark-text);margin-bottom:4px;">Sunday Offering Envelope</p>
                     <p style="font-size:0.83rem;color:#777;line-height:1.6;">Offering envelopes are available in the narthex of the church every Sunday before Divine Liturgy.</p>
                   </div>
                 </div>
-                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(0,56,147,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
+                <div style="background:white;border-radius:10px;padding:20px 22px;box-shadow:0 2px 14px rgba(44,24,16,0.08);border-left:4px solid var(--primary-gold);display:flex;gap:16px;align-items:flex-start;">
                   <span style="font-size:1.6rem;">☎</span>
                   <div>
                     <p style="font-family:'Orthodox',serif;font-size:0.875rem;font-weight:700;color:var(--dark-text);margin-bottom:4px;">By Phone</p>
-                    <p style="font-size:0.83rem;color:#777;line-height:1.6;">Call our office at <a href="tel:4163682828" style="color:var(--orthodox-blue);">416-368-2828</a> Mon–Fri 10AM–3PM to arrange your donation.</p>
+                    <p style="font-size:0.83rem;color:#777;line-height:1.6;">Call our office at <a href="tel:4163682828" style="color:var(--warm-brown);">416-368-2828</a> Mon–Fri 10AM–3PM to arrange your donation.</p>
                   </div>
                 </div>
               </div>
@@ -375,7 +405,7 @@
 
                 <!-- Via E-Transfer -->
                 <div style="background:rgba(212,175,55,0.08);border:2px solid rgba(212,175,55,0.4);border-radius:10px;padding:20px;margin-bottom:24px;text-align:center;">
-                  <p style="font-family:'Orthodox',serif;font-size:0.85rem;color:var(--orthodox-blue);margin-bottom:8px;font-weight:700;">FASTEST: INTERAC E-TRANSFER</p>
+                  <p style="font-family:'Orthodox',serif;font-size:0.85rem;color:var(--warm-brown);margin-bottom:8px;font-weight:700;">FASTEST: INTERAC E-TRANSFER</p>
                   <p style="font-size:0.9rem;color:#555;margin-bottom:12px;">Send directly to:</p>
                   <p style="font-family:'Orthodox',serif;font-size:1rem;color:var(--bulgarian-red);font-weight:700;word-break:break-all;">scmcathedraltoronto@hotmail.com</p>
                   <p style="font-size:0.78rem;color:#888;margin-top:8px;">No account required for the recipient. Message: "Donation – [your name]"</p>
@@ -423,7 +453,7 @@
 
                 <div id="donation-success" style="display:none;text-align:center;padding:24px;">
                   <svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true" style="width:2.5rem;height:3.2rem;fill:var(--primary-gold);display:block;margin-bottom:12px"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg>
-                  <h3 style="font-family:'Orthodox',serif;color:var(--orthodox-blue);margin-bottom:8px;">Thank You!</h3>
+                  <h3 style="font-family:'Orthodox',serif;color:var(--warm-brown);margin-bottom:8px;">Thank You!</h3>
                   <p style="color:#555;font-size:0.875rem;line-height:1.7;">Your donation intent has been received. Our office will reach out to you shortly. God bless your generosity!</p>
                 </div>
 

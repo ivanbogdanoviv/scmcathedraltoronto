@@ -81,7 +81,7 @@
   }
 
   .nav-menu li {
-    border-bottom: 1px solid rgba(0, 56, 147, 0.06);
+    border-bottom: 1px solid rgba(44, 24, 16, 0.06);
   }
 
   .nav-menu li a {
@@ -134,7 +134,7 @@
   .nav-dropdown-mobile a {
     padding: 12px 36px !important;
     font-size: 0.75rem !important;
-    border-bottom: 1px solid rgba(0,56,147,0.05) !important;
+    border-bottom: 1px solid rgba(44,24,16,0.05) !important;
     border-left: none !important;
     color: #1a1a2e !important;
   }
