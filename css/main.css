@@ -140,16 +140,6 @@
   z-index: 9999;
 }
 
-.orth-border-section {
-  width: 100%;
-  height: 10px;
-  background: linear-gradient(to bottom,
-    #D4AF37 0px,   #D4AF37 2px,
-    #19080A 2px,   #19080A 8px,
-    #D4AF37 8px,   #D4AF37 10px
-  );
-  margin: 32px 0;
-}
 
 /* ============================================================
    TOP CONTACT BAR
