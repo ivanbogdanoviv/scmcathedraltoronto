@@ -568,6 +568,7 @@
       event_culture_day:       'Bulgarian Culture & Slavonic Script Day',
       event_culture_day_desc:  'National Day of Bulgarian Culture and the Slavonic Alphabet. Special commemoration of Sts. Cyril & Methody.',
       event_pentecost:         'Holy Pentecost — Trinity Sunday',
+      event_pentecost_date:    'June 7, 2026',
       event_pentecost_desc:    'Descent of the Holy Spirit. Kneeling Vespers service follows the Liturgy.',
       view_all_events:         'View Full Calendar →',
 
@@ -580,6 +581,14 @@
       newsletter_modal_desc:  'Stay connected with our parish. Receive monthly bulletins, announcements, and spiritual reflections.',
       newsletter_thanks_title:'Thank You!',
       newsletter_thanks_desc: 'You are now subscribed to the Sts. Cyril and Methody Cathedral e-newsletter. God bless you!',
+      newsletter_inline_success:  'Thank you! You have been subscribed to our e-newsletter.',
+      newsletter_placeholder:     'Enter your email address',
+      newsletter_modal_name_ph:   'Your Full Name',
+      newsletter_modal_email_ph:  'Your Email Address',
+
+      // Scripture banner
+      scripture_matthew:      '"Where two or three gather in my name, there am I with them."',
+      scripture_matthew_cite: '— Matthew 18:20',
 
       // Donation section (new)
       donation_title:           'Support Our Cathedral',
@@ -596,6 +605,45 @@
       donation_way_envelope_desc:'Place your offering in a church envelope during Sunday Divine Liturgy',
       donation_way_phone:       'By Phone',
       donation_way_phone_desc:  'Call our office at 416-368-2828 to arrange a donation',
+
+      // Donate page — dedicated page content
+      donate_page_why_title:        'Why Your Gift Matters',
+      donate_page_body_p1:          'Since 1910, Sts. Cyril and Methody Cathedral has been a spiritual home for the Macedono-Bulgarian Orthodox community in Toronto. For over 116 years, the generosity of our parishioners has sustained this sacred place of worship.',
+      donate_page_body_p2:          'Your donation supports our clergy, maintains our historic building, funds our Bulgarian Sunday School, supports our choir, and enables us to serve those in need in our community.',
+      donate_page_impact_title:     'Your Gift in Action',
+      donate_page_impact_25:        'Provides candles and liturgical supplies for one Sunday service',
+      donate_page_impact_50:        'Supports one month of Sunday School materials for our children',
+      donate_page_impact_100:       'Contributes to church building maintenance and preservation',
+      donate_page_impact_500:       'Sponsors a Great Feast Divine Liturgy or memorial service',
+      donate_page_other_ways:       'Other Ways to Give',
+      donate_page_mail_title:       'Cheque by Mail',
+      donate_page_mail_desc:        'Make payable to "Sts. Cyril and Methody Cathedral" and mail to: 237 Sackville Street, Toronto, ON M5A 3G1',
+      donate_page_envelope_title:   'Sunday Offering Envelope',
+      donate_page_envelope_desc:    'Offering envelopes are available in the narthex of the church every Sunday before Divine Liturgy.',
+      donate_page_phone_title:      'By Phone',
+      donate_page_phone_desc:       'Call our office at 416-368-2828 Mon–Fri 10AM–3PM to arrange your donation.',
+      donate_page_form_title:       '❤ Make a Donation',
+      donate_page_etransfer_label:  'FASTEST: INTERAC E-TRANSFER',
+      donate_page_etransfer_send:   'Send directly to:',
+      donate_page_etransfer_note:   'No account required for the recipient. Message: "Donation – [your name]"',
+      donate_page_or_divider:       '— OR SEND US A MESSAGE —',
+      donate_page_lbl_name:         'Your Name *',
+      donate_page_lbl_email:        'Email Address *',
+      donate_page_lbl_phone:        'Phone (optional)',
+      donate_page_lbl_purpose:      'Donation Purpose',
+      donate_page_lbl_message:      'Message to the Parish (optional)',
+      donate_page_purpose_general:  'General Parish Fund',
+      donate_page_purpose_building: 'Building Maintenance Fund',
+      donate_page_purpose_school:   'Bulgarian Sunday School',
+      donate_page_purpose_choir:    'Cathedral Choir',
+      donate_page_purpose_memorial: 'Memorial / Panikhida',
+      donate_page_purpose_feast:    'Great Feast Sponsorship',
+      donate_page_purpose_other:    'Other',
+      donate_page_submit_btn:       '❤ Submit Donation Intent',
+      donate_page_submit_note:      'After submitting, our office will contact you within 1 business day to complete your donation.',
+      donate_page_thanks_title:     'Thank You!',
+      donate_page_thanks_desc:      'Your donation intent has been received. Our office will reach out to you shortly. God bless your generosity!',
+      donate_page_tax_note:         'Tax Receipt Information: Sts. Cyril and Methody Cathedral is a registered charitable organization in Canada. Official tax receipts are issued for donations of $20 or more upon request.',
 
       // Visit Us section labels (new)
       contact_address:    'ADDRESS',
@@ -1378,6 +1426,7 @@
       event_culture_day:       'Ден на Българската Просвета и Култура',
       event_culture_day_desc:  'Национален ден на българската просвета и Кирилицата. Специално честване в памет на Св. св. Кирил и Методий.',
       event_pentecost:         'Свята Петдесетница — Ден на Троицата',
+      event_pentecost_date:    '7 юни 2026',
       event_pentecost_desc:    'Слизането на Светия Дух. Коленопреклонна Вечерня след Литургията.',
       view_all_events:         'Пълен Календар →',
 
@@ -1390,6 +1439,14 @@
       newsletter_modal_desc:  'Останете свързани с нашата енория. Получавайте месечни бюлетини, обявления и духовни размисли.',
       newsletter_thanks_title:'Благодарим Ви!',
       newsletter_thanks_desc: 'Вече сте абонирани за е-бюлетина на Катедрала "Св. св. Кирил и Методий". Бог да ви благослови!',
+      newsletter_inline_success:  'Благодарим Ви! Успешно се абонирахте за нашия е-бюлетин.',
+      newsletter_placeholder:     'Въведете имейл адреса си',
+      newsletter_modal_name_ph:   'Вашето пълно ИМЕ',
+      newsletter_modal_email_ph:  'Вашият имейл адрес',
+
+      // Scripture banner
+      scripture_matthew:      '„Защото, дето двама или трима са събрани в Мое ИМЕ, там съм и Аз сред тях."',
+      scripture_matthew_cite: '— Матей 18:20',
 
       // Donation section (new)
       donation_title:           'Подкрепете нашата Катедрала',
@@ -1406,6 +1463,45 @@
       donation_way_envelope_desc:'Поставете дарението си в църковен плик по време на Неделната Литургия',
       donation_way_phone:       'По Телефон',
       donation_way_phone_desc:  'Обадете се в нашата канцелария на 416-368-2828, за да уредите дарение',
+
+      // Donate page — dedicated page content
+      donate_page_why_title:        'Защо Вашето Дарение Има Значение',
+      donate_page_body_p1:          'От 1910 г. Катедрала „Св. св. Кирил и Методий" е духовен дом за македоно-българската православна общност в Торонто. От над 116 години щедростта на нашите енориаши поддържа това свято място на богослужение.',
+      donate_page_body_p2:          'Вашето дарение подпомага нашите духовници, поддържа историческата ни сграда, финансира Българското Неделно Училище, подкрепя хора ни и ни дава възможност да служим на нуждаещите се в нашата общност.',
+      donate_page_impact_title:     'Вашето Дарение в Действие',
+      donate_page_impact_25:        'Осигурява свещи и литургични консумативи за една Неделна Служба',
+      donate_page_impact_50:        'Подпомага едномесечни материали на Неделното Училище за нашите деца',
+      donate_page_impact_100:       'Допринася за поддръжката и опазването на сградата на Катедралата',
+      donate_page_impact_500:       'Спонсорира Литургия на Велик Празник или опело',
+      donate_page_other_ways:       'Други Начини за Даряване',
+      donate_page_mail_title:       'Чек по Поща',
+      donate_page_mail_desc:        'Платим на „Sts. Cyril and Methody Cathedral" и изпратете на: 237 Sackville Street, Toronto, ON M5A 3G1',
+      donate_page_envelope_title:   'Плик за Неделно Дарение',
+      donate_page_envelope_desc:    'Пликове за дарения са налични в нартекса на Катедралата всяка неделя преди Божествената Литургия.',
+      donate_page_phone_title:      'По Телефон',
+      donate_page_phone_desc:       'Обадете се в нашата канцелария на 416-368-2828 Пон–Пет 10–15 ч., за да уредите дарението си.',
+      donate_page_form_title:       '❤ Направете Дарение',
+      donate_page_etransfer_label:  'НАЙ-БЪРЗО: INTERAC E-TRANSFER',
+      donate_page_etransfer_send:   'Изпратете директно на:',
+      donate_page_etransfer_note:   'Не се изисква акаунт от страна на получателя. Съобщение: „Дарение – [вашето ИМЕ]"',
+      donate_page_or_divider:       '— ИЛИ ИЗПРАТЕТЕ НИ СЪОБЩЕНИЕ —',
+      donate_page_lbl_name:         'Вашето ИМЕ *',
+      donate_page_lbl_email:        'Имейл Адрес *',
+      donate_page_lbl_phone:        'Телефон (по желание)',
+      donate_page_lbl_purpose:      'Цел на Дарението',
+      donate_page_lbl_message:      'Съобщение до Енорията (по желание)',
+      donate_page_purpose_general:  'Общ Енорийски Фонд',
+      donate_page_purpose_building: 'Фонд за Поддръжка на Сградата',
+      donate_page_purpose_school:   'Българско Неделно Училище',
+      donate_page_purpose_choir:    'Катедрален Хор',
+      donate_page_purpose_memorial: 'Опело / Панихида',
+      donate_page_purpose_feast:    'Спонсорство на Велик Празник',
+      donate_page_purpose_other:    'Друго',
+      donate_page_submit_btn:       '❤ Изпратете Намерение за Дарение',
+      donate_page_submit_note:      'След изпращане, нашата канцелария ще се свърже с Вас в рамките на 1 работен ден.',
+      donate_page_thanks_title:     'Благодарим Ви!',
+      donate_page_thanks_desc:      'Вашето намерение за дарение е получено. Канцеларията ни ще се свърже с Вас скоро. Бог да благослови щедростта Ви!',
+      donate_page_tax_note:         'Информация за Данъчна Квитанция: Катедрала „Св. св. Кирил и Методий" е регистрирана благотворителна организация в Канада. Официални данъчни квитанции се издават за дарения от $20 или повече при поискване.',
 
       // Visit Us section labels (new)
       contact_address:    'АДРЕС',
@@ -1667,6 +1763,24 @@
       var key = el.getAttribute('data-lang-html');
       if (t[key] !== undefined) {
         el.innerHTML = t[key];
+      }
+    });
+
+    // Translate placeholder attributes
+    var placeholderEls = document.querySelectorAll('[data-lang-key-placeholder]');
+    placeholderEls.forEach(function (el) {
+      var key = el.getAttribute('data-lang-key-placeholder');
+      if (t[key] !== undefined) {
+        el.setAttribute('placeholder', t[key]);
+      }
+    });
+
+    // Translate aria-label attributes
+    var ariaEls = document.querySelectorAll('[data-lang-key-aria]');
+    ariaEls.forEach(function (el) {
+      var key = el.getAttribute('data-lang-key-aria');
+      if (t[key] !== undefined) {
+        el.setAttribute('aria-label', t[key]);
       }
     });
 

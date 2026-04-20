@@ -437,16 +437,25 @@
       if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
 
+    var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbymi4HORDzNi5GZVPr0DQ4xqpHxm2SW5bzLwMgEO5jODdqv8MAKWxThB0BcAn9_I5os/exec';
+
     // Modal form submission
     if (modalForm) {
       modalForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        var email = modalForm.querySelector('input[type="email"]').value;
+        var emailEl = modalForm.querySelector('input[type="email"]');
+        var nameEl  = modalForm.querySelector('input[type="text"]');
+        var email = emailEl ? emailEl.value.trim() : '';
+        var name  = nameEl  ? nameEl.value.trim()  : '';
         if (!email) return;
-        // Simulate subscription (in production: send to server/Mailchimp)
         if (formWrap) formWrap.style.display = 'none';
         if (thanks) thanks.style.display = 'block';
         setTimeout(closeModal, 3500);
+        fetch(SHEETS_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({ formType: 'newsletter', name: name, email: email, source: window.location.pathname })
+        }).catch(function () {});
       });
     }
 
@@ -454,10 +463,16 @@
     if (inlineForm) {
       inlineForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        var email = inlineForm.querySelector('input[type="email"]').value;
+        var emailEl = inlineForm.querySelector('input[type="email"]');
+        var email = emailEl ? emailEl.value.trim() : '';
         if (!email) return;
         inlineForm.style.display = 'none';
         if (inlineSuccess) inlineSuccess.style.display = 'block';
+        fetch(SHEETS_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({ formType: 'newsletter', name: '', email: email, source: window.location.pathname })
+        }).catch(function () {});
       });
     }
   }

@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/hero/Cathedral_Background.png">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/navigation.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -167,7 +168,7 @@
       <div class="hero-overlay">
         <h2 class="hero-title" data-lang-key="hero_welcome">Welcome to Our Cathedral</h2>
         <p class="hero-tagline" data-lang-key="hero_tagline">Proudly serving the Macedono-Bulgarian Orthodox community since 1910</p>
-        <div style="display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;justify-content:center;">
+        <div class="hero-btns">
           <a href="services.html" class="btn btn-primary" data-lang-key="hero_btn_services"><svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true" style="margin-right:6px"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg> Our Services</a>
           <a href="events.html" class="btn btn-secondary" data-lang-key="hero_btn_events">📅 Upcoming Events</a>
           <a href="donate.html" class="btn btn-red" data-lang-key="hero_btn_donate">❤ Make a Donation</a>
@@ -381,9 +382,9 @@
 
     <!-- ===================== SCRIPTURE BANNER ===================== -->
     <div class="scripture-banner" role="complementary" aria-label="Scripture verse">
-      <blockquote>
+      <blockquote data-lang-key="scripture_matthew">
         "Where two or three gather in my name, there am I with them."
-        <cite>— Matthew 18:20</cite>
+        <cite data-lang-key="scripture_matthew_cite">— Matthew 18:20</cite>
       </blockquote>
     </div>
 
@@ -397,28 +398,28 @@
           <article class="card">
             <img src="assets/images/hero/church_photo.jpg" alt="Cathedral" class="card-image" style="height:220px;object-fit:cover;width:100%" onerror="this.style.display='none'">
             <div class="card-body">
-              <h3 class="card-title">Great Lent &amp; Holy Week Services</h3>
-              <p class="card-date">April 2026</p>
-              <p class="card-text">Join us for special Lenten services culminating in Holy Week. Palm Sunday is April 12. Pascha (Easter) is April 19. All are warmly welcome.</p>
-              <a href="news.html#holy-week-2026" class="btn btn-secondary" style="margin-top:18px">Read More</a>
+              <h3 class="card-title" data-lang-key="home_news1_title">Great Lent &amp; Holy Week Services</h3>
+              <p class="card-date" data-lang-key="home_news1_date">April 2026</p>
+              <p class="card-text" data-lang-key="home_news1_text">Join us for special Lenten services culminating in Holy Week. Divine Liturgy schedule will be announced. All parishioners and visitors are warmly welcome.</p>
+              <a href="news.html#holy-week-2026" class="btn btn-secondary" style="margin-top:18px" data-lang-key="read_more">Read More</a>
             </div>
           </article>
           <article class="card">
             <img src="assets/images/gallery/patrons-day/patrons_day_large_01.jpg" alt="Patron Saints Day" class="card-image" style="height:220px;object-fit:cover;width:100%" onerror="this.style.display='none'">
             <div class="card-body">
-              <h3 class="card-title">Patron Saints Day — May 11, 2026</h3>
-              <p class="card-date">May 11, 2026</p>
-              <p class="card-text">Annual celebration honouring Sts. Cyril and Methody with Divine Liturgy and festive banquet. All parishioners and community members welcome.</p>
-              <a href="news.html#patron-saints-day-2026" class="btn btn-secondary" style="margin-top:18px">Read More</a>
+              <h3 class="card-title" data-lang-key="home_news2_title">Patron Saints Day Celebration</h3>
+              <p class="card-date" data-lang-key="home_news2_date">May 11, 2026</p>
+              <p class="card-text" data-lang-key="home_news2_text">Annual celebration honouring Sts. Cyril and Methody with Divine Liturgy and festive banquet. All parishioners and community members welcome.</p>
+              <a href="news.html#patron-saints-day-2026" class="btn btn-secondary" style="margin-top:18px" data-lang-key="read_more">Read More</a>
             </div>
           </article>
           <article class="card">
             <img src="assets/images/gallery/school/school_large_01.jpg" alt="Cathedral Choir" class="card-image" style="height:220px;object-fit:cover;width:100%" onerror="this.style.display='none'">
             <div class="card-body">
-              <h3 class="card-title">Cathedral Choir — New Members Welcome</h3>
-              <p class="card-date">2026 — Open Auditions</p>
-              <p class="card-text">Share your musical gifts in service to the Lord. Cathedral Choir rehearsals every Sunday at 9:00 AM. Contact the church office for details.</p>
-              <a href="news.html#choir-2026" class="btn btn-secondary" style="margin-top:18px">Read More</a>
+              <h3 class="card-title" data-lang-key="home_news3_title">Cathedral Choir — New Members Auditions</h3>
+              <p class="card-date" data-lang-key="home_news3_date">2026 — Open Auditions</p>
+              <p class="card-text" data-lang-key="home_news3_text">Cathedral Choir auditions open! Share your musical gifts in service to the Lord. Rehearsals Sundays 9:00 AM. Contact the church office for details.</p>
+              <a href="news.html#choir-2026" class="btn btn-secondary" style="margin-top:18px" data-lang-key="read_more">Read More</a>
             </div>
           </article>
         </div>
@@ -438,7 +439,7 @@
           <button type="submit" class="btn btn-primary" data-lang-key="newsletter_btn">Subscribe</button>
         </form>
         <div class="newsletter-success-msg" id="newsletter-inline-success" role="alert">
-          <svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true" style="margin-right:6px"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg>&nbsp;Thank you! You have been subscribed to our e-newsletter.
+          <svg class="orthodox-cross-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 30" aria-hidden="true" style="margin-right:6px"><rect x="9" y="0" width="4" height="30" rx="0.5"/><rect x="4.5" y="3" width="13" height="2.8" rx="0.5"/><rect x="0" y="11" width="22" height="3.5" rx="0.5"/><polygon points="2.5,20 19.5,24.5 19.5,22 2.5,17.5"/></svg>&nbsp;<span data-lang-key="newsletter_inline_success">Thank you! You have been subscribed to our e-newsletter.</span>
         </div>
         <p class="newsletter-privacy-note" data-lang-key="newsletter_privacy">We respect your privacy. Your information is never shared. Unsubscribe at any time.</p>
       </div>
@@ -604,8 +605,8 @@
           Stay connected with Sts. Cyril and Methody Cathedral. Receive Holy Day announcements, event news, and monthly bulletins.
         </p>
         <form class="newsletter-modal-form" id="newsletter-modal-form" novalidate>
-          <input type="text" name="name" placeholder="Your Full Name" aria-label="Full name" autocomplete="name">
-          <input type="email" name="email" placeholder="Your Email Address" required aria-label="Email address" autocomplete="email">
+          <input type="text" name="name" placeholder="Your Full Name" aria-label="Full name" autocomplete="name" data-lang-key-placeholder="newsletter_modal_name_ph">
+          <input type="email" name="email" placeholder="Your Email Address" required aria-label="Email address" autocomplete="email" data-lang-key-placeholder="newsletter_modal_email_ph">
           <button type="submit" class="btn btn-primary" data-lang-key="newsletter_btn">Subscribe Now</button>
         </form>
         <p class="newsletter-modal-privacy" data-lang-key="newsletter_privacy">We respect your privacy. Your information is never shared. Unsubscribe at any time.</p>
